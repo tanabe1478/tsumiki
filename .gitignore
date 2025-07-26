@@ -3,6 +3,8 @@
 .idea/
 *.swp
 *.swo
+*.iml
+
 
 # OS generated files
 .DS_Store
