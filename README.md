@@ -1,10 +1,17 @@
-# Kairo - AI駆動型開発支援コマンドセット
+# Tsumiki - AI駆動開発支援フレームワーク
 
-Kairoは、要件定義から実装までの開発プロセスを自動化・支援するClaude Code用のコマンドセットです。
+TsumikiはAI駆動開発のためのフレームワークです。要件定義から実装まで、AIを活用した効率的な開発プロセスを提供します。
 
 ## 概要
 
-Kairoは以下の開発フローを支援します：
+Tsumikiは以下の2つのコマンドで構成されています：
+
+- **kairo** - 要件定義から実装までの包括的な開発フロー
+- **tdd** - テスト駆動開発（TDD）の個別実行
+
+### Kairoコマンド
+
+Kairoは要件定義から実装までの開発プロセスを自動化・支援します。以下の開発フローを支援します：
 
 1. **要件展開** - 概要から詳細な要件定義書を生成
 2. **設計** - 技術設計文書を自動生成
@@ -13,26 +20,52 @@ Kairoは以下の開発フローを支援します：
 
 ## インストール
 
-このリポジトリには既にKairoコマンドがインストールされています。
+このリポジトリには既にTsumikiコマンドがインストールされています。
 `.claude/commands/` ディレクトリに以下のコマンドが含まれています：
 
-### Kairoコマンド
+### Kairoコマンド（包括的開発フロー）
 - `kairo-requirements.md` - 要件展開
 - `kairo-design.md` - 設計文書生成
 - `kairo-tasks.md` - タスク分割
 - `kairo-implement.md` - 実装実行
 
-### 既存のTDDコマンド（Kairoが内部で使用）
-- `tdd-requirements.md`
-- `tdd-testcases.md`
-- `tdd-red.md`
-- `tdd-green.md`
-- `tdd-refactor.md`
-- `tdd-verify-complete.md`
+### TDDコマンド（個別実行）
+- `tdd-requirements.md` - TDD要件定義
+- `tdd-testcases.md` - テストケース作成
+- `tdd-red.md` - テスト実装（Red）
+- `tdd-green.md` - 最小実装（Green）
+- `tdd-refactor.md` - リファクタリング
+- `tdd-verify-complete.md` - 品質確認
 
 ## 使用方法
 
-### 1. 要件定義
+### TDDコマンド
+
+個別にTDDプロセスを実行したい場合は、以下のコマンドを順次実行できます：
+
+```bash
+# TDD要件定義
+$ claude code tdd-requirements
+
+# テストケース作成
+$ claude code tdd-testcases
+
+# テスト実装（Red）
+$ claude code tdd-red
+
+# 最小実装（Green）
+$ claude code tdd-green
+
+# リファクタリング
+$ claude code tdd-refactor
+
+# 品質確認
+$ claude code tdd-verify-complete
+```
+
+### Kairoコマンド（包括的フロー）
+
+#### 1. 要件定義
 
 最初に、プロジェクトの要件概要をKairoに伝えます：
 
@@ -102,13 +135,13 @@ $ claude code kairo-implement
 # "TASK-101を実装してください"
 ```
 
-Kairoは各タスクに対して以下のTDDプロセスを実行します：
-1. 詳細要件定義
-2. テストケース作成
-3. テスト実装（Red）
-4. 最小実装（Green）
-5. リファクタリング
-6. 品質確認
+Kairoは各タスクに対して内部的にTDDコマンドを使用して以下のプロセスを実行します：
+1. 詳細要件定義（tdd-requirements）
+2. テストケース作成（tdd-testcases）
+3. テスト実装（tdd-red）
+4. 最小実装（tdd-green）
+5. リファクタリング（tdd-refactor）
+6. 品質確認（tdd-verify-complete）
 
 ## ディレクトリ構造
 
@@ -153,7 +186,7 @@ flowchart TD
    - EARS記法による明確な要件定義
 
 2. **品質の担保**
-   - TDD による堅牢な実装
+   - TDDコマンドによる堅牢な実装
    - 包括的なテストカバレッジ
 
 3. **効率的な開発**
