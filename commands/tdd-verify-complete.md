@@ -15,13 +15,12 @@ TDD開発でテストケースの実装が完全に完了しているかを検�
 - テスト失敗がある場合は先に修正が必要
 - すべてのテストがグリーンであることを確認してから次のステップに進む
 
-### 2. 事前準備
-
-検証コンテキストの準備を行います：
-
-**Taskツール実行**: `/tdd-load-context` でTDD関連ファイルの読み込みとコンテキスト準備を実行
-
-読み込み完了後、準備されたコンテキスト情報を基にテストケース完全性検証を開始します。
+### 2. TDDメモファイルと要件定義文書の確認
+- `doc/implementation/{test_case_name}-memo.md` を確認（メモファイルが存在する場合）
+- `doc/implementation/{feature_name}-requirements.md` を確認
+- `doc/implementation/{feature_name}-testcases.md` を確認
+- `doc/todo.md` を確認して対象タスクの現在のステータスを把握
+- 予定していたテストケース数と内容を把握
 
 ### 2. 実装済みテストケースの確認
 
@@ -108,9 +107,8 @@ TDD開発でテストケースの実装が完全に完了しているかを検�
 
 ### 5. 検証結果のメモファイル記録とTODO.md更新
 
-#### メモファイルの統合更新
-
-検証完了後、`docs/implements/{{task_id}}/{feature_name}-memo.md` の既存内容を整理・統合し、以下の情報に更新：
+#### メモファイルへの追記
+検証完了後、以下の情報を `doc/implementation/{test_case_name}-memo.md` に追記：
 
 ```markdown
 # [機能名] TDD開発完了記録
@@ -207,10 +205,9 @@ TDD開発でテストケースの実装が完全に完了しているかを検�
 ## 検証対象ファイル
 
 ### 確認すべきドキュメント
-
-- `docs/tasks/{要件名}-tasks.md` - プロジェクト全体のタスク完了状況（完了マーク更新対象）
-- `docs/implements/{{task_id}}/{feature_name}-requirements.md`
-- `docs/implements/{{task_id}}/{feature_name}-testcases.md`
+- `doc/todo.md` - プロジェクト全体のタスク完了状況（完了マーク更新対象）
+- `doc/implementation/{feature_name}-requirements.md`
+- `doc/implementation/{feature_name}-testcases.md`
 
 ### 確認すべきテストファイル
 

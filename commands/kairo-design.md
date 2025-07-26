@@ -1,11 +1,9 @@
 # kiro-design
 
 ## 目的
-
 承認された要件定義書に基づいて、技術設計文書を生成する。データフロー図、TypeScriptインターフェース、データベーススキーマ、APIエンドポイントを含む包括的な設計を行う。
 
 ## 前提条件
-
 - `docs/spec/` に要件定義書が存在する
 - 要件がユーザによって承認されている
 
@@ -54,73 +52,61 @@
 ## 出力フォーマット例
 
 ### architecture.md
-
 ```markdown
 # {要件名} アーキテクチャ設計
 
 ## システム概要
-
 {システムの概要説明}
 
 ## アーキテクチャパターン
-
 - パターン: {選択したパターン}
 - 理由: {選択理由}
 
 ## コンポーネント構成
-
 ### フロントエンド
-
 - フレームワーク: {使用フレームワーク}
 - 状態管理: {状態管理方法}
 
 ### バックエンド
-
 - フレームワーク: {使用フレームワーク}
 - 認証方式: {認証方法}
 
 ### データベース
-
 - DBMS: {使用するDBMS}
 - キャッシュ: {キャッシュ戦略}
 ```
 
 ### dataflow.md
-
 ```markdown
 # データフロー図
 
 ## ユーザーインタラクションフロー
-
 \`\`\`mermaid
 flowchart TD
-A[ユーザー] --> B[フロントエンド]
-B --> C[API Gateway]
-C --> D[バックエンド]
-D --> E[データベース]
+    A[ユーザー] --> B[フロントエンド]
+    B --> C[API Gateway]
+    C --> D[バックエンド]
+    D --> E[データベース]
 \`\`\`
 
 ## データ処理フロー
-
 \`\`\`mermaid
 sequenceDiagram
-participant U as ユーザー
-participant F as フロントエンド
-participant B as バックエンド
-participant D as データベース
-
+    participant U as ユーザー
+    participant F as フロントエンド
+    participant B as バックエンド
+    participant D as データベース
+    
     U->>F: アクション
     F->>B: APIリクエスト
     B->>D: クエリ実行
     D-->>B: 結果返却
     B-->>F: レスポンス
     F-->>U: 画面更新
-
 \`\`\`
 ```
 
 ### interfaces.ts
-
 ```typescript
 // エンティティ定義
 export interface User {
@@ -149,7 +135,6 @@ export interface ApiResponse<T> {
 ```
 
 ### database-schema.sql
-
 ```sql
 -- ユーザーテーブル
 CREATE TABLE users (
@@ -165,46 +150,38 @@ CREATE INDEX idx_users_email ON users(email);
 ```
 
 ### api-endpoints.md
-
 ```markdown
 # API エンドポイント仕様
 
 ## 認証
-
 ### POST /auth/login
-
 リクエスト:
 \`\`\`json
 {
-"email": "user@example.com",
-"password": "password"
+  "email": "user@example.com",
+  "password": "password"
 }
 \`\`\`
 
 レスポンス:
 \`\`\`json
 {
-"success": true,
-"data": {
-"token": "jwt-token",
-"user": { ... }
-}
+  "success": true,
+  "data": {
+    "token": "jwt-token",
+    "user": { ... }
+  }
 }
 \`\`\`
 
 ## ユーザー管理
-
 ### GET /users/:id
-
 ### POST /users
-
 ### PUT /users/:id
-
 ### DELETE /users/:id
 ```
 
 ## 実行後の確認
-
 - 作成したファイルの一覧を表示
 - 設計の主要なポイントをサマリーで表示
 - ユーザに確認を促すメッセージを表示
