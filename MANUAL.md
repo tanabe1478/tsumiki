@@ -13,7 +13,7 @@ TASK作成時に `TDD` と判定している場合で個別にTDDプロセスを
 # テストケース作成
 /tdd-testcases タスクファイル名　TASK番号
 
-# テスト実装〜品質確認まで自動化する場合
+# テスト実装〜TDD完了確認まで自動化する場合
 ./tdd-cycle-full.sh  "タスクファイル名　TASK番号"
 
 # テスト実装（Red）
@@ -25,7 +25,7 @@ TASK作成時に `TDD` と判定している場合で個別にTDDプロセスを
 # リファクタリング
 /tdd-refactor タスクファイル名　TASK番号
 
-# 品質確認
+# TDD完了確認
 /tdd-verify-complete タスクファイル名　TASK番号
 ```
 
@@ -117,12 +117,12 @@ Kairoは以下を生成します：
 ```
 
 Kairoは各タスクに対して内部的にTDDコマンドを使用して以下のプロセスを実行します：
-1. 詳細要件定義（tdd-requirements）
+1. TDD要件定義（tdd-requirements）
 2. テストケース作成（tdd-testcases）
 3. テスト実装（tdd-red）
 4. 最小実装（tdd-green）
 5. リファクタリング（tdd-refactor）
-6. 品質確認（tdd-verify-complete）
+6. TDD完了確認（tdd-verify-complete）
 
 ## ディレクトリ構造
 
