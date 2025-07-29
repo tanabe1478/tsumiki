@@ -2,6 +2,19 @@
 
 ## 使用方法
 
+### セットアップ
+
+プロジェクトを使用する前に、まず `commands` ディレクトリの内容をClaudeのコマンドディレクトリにコピーします：
+
+```bash
+# プロジェクトのcommandsディレクトリを.claude/commandsにコピー
+cp -r commands ~/.claude/commands/
+
+# または、プロジェクトディレクトリ内で
+mkdir -p .claude
+cp -r commands .claude/
+```
+
 ### TDDコマンド
 
 TASK作成時に `TDD` と判定している場合で個別にTDDプロセスを実行したい場合は、以下のコマンドを順次実行できます：
