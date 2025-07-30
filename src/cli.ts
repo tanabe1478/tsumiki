@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
+import { gitignoreCommand } from "./commands/gitignore.js";
 import { installCommand } from "./commands/install.js";
 import { uninstallCommand } from "./commands/uninstall.js";
 
@@ -20,5 +21,10 @@ program
   .command("uninstall")
   .description("Uninstall Claude Code command templates from .claude/commands/")
   .action(uninstallCommand);
+
+program
+  .command("gitignore")
+  .description("Add commands/*.{md,sh} to .gitignore file")
+  .action(gitignoreCommand);
 
 program.parse();
