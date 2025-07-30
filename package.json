@@ -17,9 +17,10 @@
     "dev": "tsx",
     "build": "tsup --clean",
     "prepare": "simple-git-hooks",
-    "check": "biome check .",
-    "fix": "biome check . --write",
-    "secretlint": "secretlint --secretlintignore .gitignore **/*"
+    "check": "biome check src",
+    "fix": "biome check src --write",
+    "secretlint": "secretlint --secretlintignore .gitignore **/*",
+    "typecheck": "tsgo --noEmit"
   },
   "keywords": [],
   "author": "",
@@ -38,6 +39,7 @@
     "@types/fs-extra": "11.0.4",
     "@types/node": "24.1.0",
     "@types/react": "19.1.9",
+    "@typescript/native-preview": "7.0.0-dev.20250729.2",
     "secretlint": "10.2.1",
     "simple-git-hooks": "2.13.0",
     "tsup": "8.5.0",
@@ -45,6 +47,6 @@
     "typescript": "5.8.3"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm exec secretlint --secretlintignore .gitignore **/*"
+    "pre-commit": "pnpm secretlint && pnpm typecheck && pnpm fix"
   }
 }
