@@ -36,13 +36,13 @@ const InstallComponent: React.FC = () => {
 
         setStatus("copying");
 
-        // commandsディレクトリ内のすべての.mdファイルを取得
+        // commandsディレクトリ内のすべての.mdファイルと.shファイルを取得
         const files = await fs.readdir(tsumikiDir);
-        const mdFiles = files.filter((file) => file.endsWith(".md"));
+        const targetFiles = files.filter((file) => file.endsWith(".md") || file.endsWith(".sh"));
 
         const copiedFilesList: string[] = [];
 
-        for (const file of mdFiles) {
+        for (const file of targetFiles) {
           const sourcePath = path.join(tsumikiDir, file);
           const targetPath = path.join(targetDir, file);
 
