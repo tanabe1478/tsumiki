@@ -1,6 +1,7 @@
 {
   "name": "@dyoshikawa/tsumiki",
   "version": "0.0.1",
+  "private": false,
   "description": "A CLI tool for install tsumiki commands",
   "keywords": [
     "cli",
