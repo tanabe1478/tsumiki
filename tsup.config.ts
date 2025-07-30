@@ -11,4 +11,5 @@ export default defineConfig({
   bundle: true,
   external: ["ink", "react"],
   noExternal: ["commander", "fs-extra"],
+  publicDir: "commands",
 });

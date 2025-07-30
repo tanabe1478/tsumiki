@@ -24,8 +24,8 @@ const InstallComponent: React.FC = () => {
         const currentDir = process.cwd();
         const targetDir = path.join(currentDir, ".claude", "commands");
 
-        // tsumikiのcommandsディレクトリを取得
-        const tsumikiDir = path.resolve(__dirname, "..", "..", "commands");
+        // tsumikiのcommandsディレクトリを取得（distに同梱されたcommands）
+        const tsumikiDir = path.resolve(__dirname, "commands");
 
         // .claude/commandsディレクトリが存在しない場合は作成
         await fs.ensureDir(targetDir);

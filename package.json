@@ -1,10 +1,26 @@
 {
-  "name": "tsumiki",
-  "version": "1.0.0",
-  "description": "",
-  "main": "./dist/cli.cjs",
-  "module": "./dist/cli.js",
-  "types": "./dist/cli.d.ts",
+  "name": "@classmethod/tsumiki",
+  "version": "0.1.0",
+  "description": "A CLI tool for install tsumiki commands",
+  "keywords": [
+    "cli",
+    "tsumiki",
+    "claude",
+    "claudecode",
+    "ai"
+  ],
+  "homepage": "https://github.com/classmethod/tsumiki#readme",
+  "bugs": {
+    "url": "https://github.com/classmethod/tsumiki/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/classmethod/tsumiki.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "classmethod"
+  },
   "type": "module",
   "exports": {
     ".": {
@@ -13,19 +29,27 @@
       "require": "./dist/cli.cjs"
     }
   },
+  "main": "./dist/cli.cjs",
+  "module": "./dist/cli.js",
+  "types": "./dist/cli.d.ts",
+  "bin": {
+    "tsumiki": "./dist/cli.cjs"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "dev": "tsx",
     "build": "tsup --clean",
-    "prepare": "simple-git-hooks",
     "check": "biome check src",
+    "dev": "tsx",
     "fix": "biome check src --write",
+    "prepare": "simple-git-hooks",
     "secretlint": "secretlint --secretlintignore .gitignore **/*",
     "typecheck": "tsgo --noEmit"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.13.1",
+  "simple-git-hooks": {
+    "pre-commit": "pnpm secretlint && pnpm typecheck && pnpm fix"
+  },
   "dependencies": {
     "commander": "14.0.0",
     "fs-extra": "11.3.0",
@@ -46,7 +70,8 @@
     "tsx": "4.20.3",
     "typescript": "5.8.3"
   },
-  "simple-git-hooks": {
-    "pre-commit": "pnpm secretlint && pnpm typecheck && pnpm fix"
+  "packageManager": "pnpm@10.13.1",
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
