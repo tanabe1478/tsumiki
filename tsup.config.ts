@@ -9,7 +9,6 @@ export default defineConfig({
   sourcemap: true,
   splitting: false,
   bundle: true,
-  external: ["ink", "react"],
-  noExternal: ["commander", "fs-extra"],
+  external: [],
   publicDir: "commands",
 });
