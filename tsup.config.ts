@@ -1,14 +1,14 @@
-import { defineConfig } from "tsup";
+import { defineConfig } from 'tsup';
 
 export default defineConfig({
-  entry: ["src/cli.ts"],
-  format: ["cjs", "esm"],
-  target: "node18",
-  outDir: "dist",
+  entry: ['src/cli.ts'],
+  format: ['esm', 'cjs'],
+  dts: true,
+  outDir: 'dist',
   clean: true,
-  sourcemap: true,
-  splitting: false,
-  bundle: true,
-  external: [],
-  publicDir: "commands",
+  target: 'es2022',
+  tsconfig: 'tsconfig.json',
+  esbuildOptions: (options) => {
+    options.jsx = 'automatic';
+  },
 });
