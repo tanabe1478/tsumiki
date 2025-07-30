@@ -4,7 +4,7 @@ TsumikiはAI駆動開発のためのフレームワークです。要件定義�
 
 ## インストール
 
-Tsumikiを使用するには、npxコマンドでインストールしてください：
+Tsumikiを使用するには、次のnpxコマンドでインストールしてください：
 
 ```bash
 npx tsumiki install
