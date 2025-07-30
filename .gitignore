@@ -14,3 +14,13 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build output
+dist/
+*.tsbuildinfo
