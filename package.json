@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prepare": "simple-git-hooks",
     "check": "biome check .",
     "fix": "biome check . --write",
     "secretlint": "secretlint --secretlintignore .gitignore **/*"
@@ -30,6 +31,6 @@
     "typescript": "5.8.3"
   },
   "simple-git-hooks": {
-    "pre-commit": "secretlint --secretlintignore .gitignore"
+    "pre-commit": "pnpm exec secretlint --secretlintignore .gitignore **/*"
   }
 }
