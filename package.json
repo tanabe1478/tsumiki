@@ -1,7 +1,7 @@
 {
   "name": "@dyoshikawa/tsumiki",
   "private": false,
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A CLI tool for install tsumiki commands",
   "keywords": [
     "cli",
@@ -34,7 +34,7 @@
   "module": "./dist/cli.js",
   "types": "./dist/cli.d.ts",
   "bin": {
-    "tsumiki": "./dist/cli.cjs"
+    "tsumiki": "./dist/cli.js"
   },
   "files": [
     "dist"
