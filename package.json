@@ -1,5 +1,5 @@
 {
-  "name": "@classmethod/tsumiki",
+  "name": "@dyoshikawa/tsumiki",
   "version": "0.1.0",
   "description": "A CLI tool for install tsumiki commands",
   "keywords": [
