@@ -38,7 +38,9 @@ const InstallComponent: React.FC = () => {
 
         // commandsディレクトリ内のすべての.mdファイルと.shファイルを取得
         const files = await fs.readdir(tsumikiDir);
-        const targetFiles = files.filter((file) => file.endsWith(".md") || file.endsWith(".sh"));
+        const targetFiles = files.filter(
+          (file) => file.endsWith(".md") || file.endsWith(".sh"),
+        );
 
         const copiedFilesList: string[] = [];
 
