@@ -1,8 +1,8 @@
 import * as path from "node:path";
+import { fileURLToPath } from "node:url";
 import fs from "fs-extra";
 import { Box, Newline, render, Text } from "ink";
 import React, { useEffect, useState } from "react";
-import { fileURLToPath } from "node:url";
 
 type InstallStatus =
   | "starting"
