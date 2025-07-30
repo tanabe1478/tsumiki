@@ -40,9 +40,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup --clean",
+    "build": "rm -rf dist && mkdir -p dist/commands && cp ./commands/*.md ./commands/*.sh dist/commands/ 2>/dev/null || true && tsup",
     "check": "biome check src",
-    "dev": "tsx",
+    "dev": "tsx src/cli.ts",
     "fix": "biome check src --write",
     "prepare": "simple-git-hooks",
     "secretlint": "secretlint --secretlintignore .gitignore **/*",

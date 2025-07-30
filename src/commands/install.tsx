@@ -1,7 +1,8 @@
 import * as path from "node:path";
-import * as fs from "fs-extra";
+import fs from "fs-extra";
 import { Box, Newline, render, Text } from "ink";
 import React, { useEffect, useState } from "react";
+import { fileURLToPath } from "node:url";
 
 type InstallStatus =
   | "starting"
@@ -24,8 +25,11 @@ const InstallComponent: React.FC = () => {
         const currentDir = process.cwd();
         const targetDir = path.join(currentDir, ".claude", "commands");
 
-        // tsumikiのcommandsディレクトリを取得（distに同梱されたcommands）
-        const tsumikiDir = path.resolve(__dirname, "commands");
+        // tsumikiのcommandsディレクトリを取得
+        const __filename = fileURLToPath(import.meta.url);
+        const __dirname = path.dirname(__filename);
+        // 開発時はプロジェクトルートのcommandsディレクトリを、ビルド後はdist/commandsを参照
+        const tsumikiDir = path.resolve(__dirname, "../../commands");
 
         // .claude/commandsディレクトリが存在しない場合は作成
         await fs.ensureDir(targetDir);

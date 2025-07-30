@@ -5,7 +5,7 @@ export default defineConfig({
   format: ['esm', 'cjs'],
   dts: true,
   outDir: 'dist',
-  clean: true,
+  clean: false,
   target: 'es2022',
   tsconfig: 'tsconfig.json',
   esbuildOptions: (options) => {

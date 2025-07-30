@@ -24,3 +24,4 @@ pnpm-lock.yaml
 # Build output
 dist/
 *.tsbuildinfo
+assets/
