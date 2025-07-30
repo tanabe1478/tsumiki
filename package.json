@@ -1,5 +1,5 @@
 {
-  "name": "@dyoshikawa/tsumiki",
+  "name": "tsumiki",
   "private": false,
   "version": "0.0.6",
   "description": "A CLI tool for install tsumiki commands",
