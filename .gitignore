@@ -17,6 +17,7 @@ Thumbs.db
 
 # Dependencies
 node_modules/
+.pnpm-store/
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
@@ -24,4 +25,9 @@ pnpm-lock.yaml
 # Build output
 dist/
 *.tsbuildinfo
-assets/
+
+# Claude Code
+.claude/settings.local.json
+
+# Others
+tmp/
