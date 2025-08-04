@@ -28,7 +28,17 @@ TDD開発でテストケースの実装が完全に完了しているかを検�
 
 検証コンテキストの準備を行います：
 
-**Taskツール実行**: `/tdd-load-context` でTDD関連ファイルの読み込みとコンテキスト準備を実行
+1. **@agent-symbol-searcher で検証関連情報を検索し、見つかったファイルを読み込み**
+   - 完了予定のテストケースや機能を検索し、該当ファイルをReadツールで読み込み
+   - 既存のテストカバレッジや品質基準を確認し、関連ファイルをReadツールで読み込み
+   - 実装完了タスクのマーキングパターンを特定し、タスクファイルをReadツールで読み込み
+
+2. **関連ファイルを直接読み込み**
+   - `docs/implements/{{task_id}}/{feature_name}-memo.md` - 既存の開発履歴を確認
+   - `docs/implements/{{task_id}}/{feature_name}-requirements.md` - 要件定義を確認
+   - `docs/implements/{{task_id}}/{feature_name}-testcases.md` - テストケース定義を確認
+   - `docs/implements/{{task_id}}/{feature_name}-refactor-phase.md` - Refactorフェーズの結果を確認
+   - 元タスクファイル (`docs/tasks/{taskfile}.md`) - タスクの完了状態を確認
 
 読み込み完了後、準備されたコンテキスト情報を基にテストケース完全性検証を開始します。
 
