@@ -6,7 +6,16 @@
 
 開発コンテキストの準備を行います：
 
-**Taskツール実行**: `/tdd-load-context` でTDD関連ファイルの読み込みとコンテキスト準備を実行
+1. **@agent-symbol-searcher でテスト関連情報を検索し、見つかったファイルを読み込み**
+   - 既存のテストパターンやテストケースを検索し、該当テストファイルをReadツールで読み込み
+   - 類似機能のテスト方法やモック戦略を特定し、関連ファイルをReadツールで読み込み
+   - テストフレームワークの使用方法を確認し、設定ファイルをReadツールで読み込み
+
+2. **関連ファイルを直接読み込み**
+   - `docs/implements/{{task_id}}/{feature_name}-memo.md` - 既存の開発履歴を確認
+   - `docs/implements/{{task_id}}/{feature_name}-requirements.md` - 要件定義を確認
+   - `docs/implements/{{task_id}}/{feature_name}-testcases.md` - 既存のテストケースを確認
+   - 関連する設計文書やタスクファイルも必要に応じて読み込み
 
 読み込み完了後、準備されたコンテキスト情報を基にテストケースの洗い出しを行います。
 

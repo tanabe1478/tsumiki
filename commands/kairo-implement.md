@@ -21,11 +21,13 @@
 - 🔴 **赤信号**: EARS要件定義書・設計文書にない推測の場合
 
 1. **タスクの選択**
+   - @agent-symbol-searcher で指定されたタスクIDを検索し、見つかったタスクファイルをReadツールで読み込み
    - ユーザが指定したタスクIDを確認
    - 指定がない場合は、依存関係に基づいて次のタスクを自動選択
    - 選択したタスクの詳細を表示
 
 2. **依存関係の確認**
+   - @agent-symbol-searcher で依存タスクの状態を検索し、見つかったタスクファイルをReadツールで読み込み
    - 依存タスクが完了しているか確認
    - 未完了の依存タスクがある場合は警告
 
@@ -41,42 +43,78 @@
 
    ### A. **TDDプロセス**（コード実装タスク用）
 
-   a. **要件定義** (`tdd-requirements.md`)
-   - タスクの詳細要件を記述
-   - 受け入れ基準を明確化
+   a. **要件定義** - `@task general-purpose tdd-requirements.md`
+   ```
+   Task実行: TDD要件定義フェーズ
+   目的: タスクの詳細要件を記述し、受け入れ基準を明確化する
+   コマンド: tdd-requirements.md
+   実行方式: 個別Task実行
+   ```
 
-   b. **テストケース作成** (`tdd-testcases.md`)
-   - 単体テストケースを作成
-   - エッジケースを考慮
+   b. **テストケース作成** - `@task general-purpose tdd-testcases.md`
+   ```
+   Task実行: TDDテストケース作成フェーズ
+   目的: 単体テストケースを作成し、エッジケースを考慮する
+   コマンド: tdd-testcases.md
+   実行方式: 個別Task実行
+   ```
 
-   c. **テスト実装** (`tdd-red.md`)
-   - 失敗するテストを実装
-   - テストが失敗することを確認
+   c. **テスト実装** - `@task general-purpose tdd-red.md`
+   ```
+   Task実行: TDDレッドフェーズ
+   目的: 失敗するテストを実装し、テストが失敗することを確認する
+   コマンド: tdd-red.md
+   実行方式: 個別Task実行
+   ```
 
-   d. **最小実装** (`tdd-green.md`)
-   - テストが通る最小限の実装
-   - 過度な実装を避ける
+   d. **最小実装** - `@task general-purpose tdd-green.md`
+   ```
+   Task実行: TDDグリーンフェーズ
+   目的: テストが通る最小限の実装を行い、過度な実装を避ける
+   コマンド: tdd-green.md
+   実行方式: 個別Task実行
+   ```
 
-   e. **リファクタリング** (`tdd-refactor.md`)
-   - コードの品質向上
-   - 保守性の改善
+   e. **リファクタリング** - `@task general-purpose tdd-refactor.md`
+   ```
+   Task実行: TDDリファクタリングフェーズ
+   目的: コードの品質向上と保守性の改善を行う
+   コマンド: tdd-refactor.md
+   実行方式: 個別Task実行
+   ```
 
-   f. **品質確認** (`tdd-verify-complete.md`)
-   - 実装の完成度を確認
-   - 不足があれば c-f を繰り返す
+   f. **品質確認** - `@task general-purpose tdd-verify-complete.md`
+   ```
+   Task実行: TDD品質確認フェーズ
+   目的: 実装の完成度を確認し、不足があればc-fを繰り返す
+   コマンド: tdd-verify-complete.md
+   実行方式: 個別Task実行
+   ```
 
    ### B. **直接作業プロセス**（準備作業タスク用）
 
-   a. **準備作業の実行**
+   a. **準備作業の実行** - `@task general-purpose direct-work-execute`
+   ```
+   Task実行: 直接作業実行フェーズ
+   目的: ディレクトリ作成、設定ファイル作成、依存関係のインストール、環境設定を行う
+   作業内容:
    - ディレクトリ作成
    - 設定ファイル作成
    - 依存関係のインストール
    - 環境設定
+   実行方式: 個別Task実行
+   ```
 
-   b. **作業結果の確認**
+   b. **作業結果の確認** - `@task general-purpose direct-work-verify`
+   ```
+   Task実行: 直接作業確認フェーズ
+   目的: 作業完了の検証と成果物確認を行う
+   作業内容:
    - 作業完了の検証
    - 期待された成果物の確認
    - 次のタスクへの準備状況確認
+   実行方式: 個別Task実行
+   ```
 
 6. **タスクの完了処理**
    - タスクのステータスを更新（タスクファイルのチェックボックスにチェックを入れる）
@@ -154,6 +192,33 @@ $ claude code kairo-implement --status
 
 **例**: プロジェクト初期化、データベース設定、開発環境設定
 
+## 個別Task実行アプローチ
+
+### Task実行の方針
+
+各実装ステップを個別のTaskとして実行することで、以下のメリットが得られます：
+
+1. **独立性**: 各ステップが独立して実行され、エラー発生時の切り分けが容易
+2. **再実行性**: 特定のステップのみ再実行が可能
+3. **並列性**: 依存関係のないステップは並列実行可能
+4. **追跡性**: 各ステップの実行状況と結果が明確に記録される
+
+### Task実行パターン
+
+```bash
+# TDDプロセスの場合
+@task general-purpose tdd-requirements.md
+@task general-purpose tdd-testcases.md
+@task general-purpose tdd-red.md
+@task general-purpose tdd-green.md
+@task general-purpose tdd-refactor.md
+@task general-purpose tdd-verify-complete.md
+
+# 直接作業プロセスの場合
+@task general-purpose direct-work-execute
+@task general-purpose direct-work-verify
+```
+
 ## 実装時の注意事項
 
 ### TDDプロセス用
@@ -217,19 +282,23 @@ $ claude code kairo-implement --status
 ### 各ステップ完了時（TDD）
 
 ```
-✅ Step 1/6: 要件定義 完了
+✅ Task 1/6: @task tdd-requirements 完了
    ファイル: /implementation/{要件名}/TASK-101/requirements.md
+   Task実行結果: 要件定義書作成完了
 
-🏃 Step 2/6: テストケース作成 実行中...
+🏃 Task 2/6: @task tdd-testcases 実行中...
+   Task実行: TDDテストケース作成フェーズを開始
 ```
 
 ### 各ステップ完了時（直接作業）
 
 ```
-✅ Step 1/2: 準備作業実行 完了
+✅ Task 1/2: @task direct-work-execute 完了
    作成ファイル: 8個、設定更新: 3個
+   Task実行結果: 準備作業実行完了
 
-🏃 Step 2/2: 作業結果確認 実行中...
+🏃 Task 2/2: @task direct-work-verify 実行中...
+   Task実行: 直接作業確認フェーズを開始
 ```
 
 ### タスク完了時（TDD）
@@ -241,7 +310,8 @@ $ claude code kairo-implement --status
    - [ ] **タスク完了** → [x] **タスク完了**
 
 📊 実装サマリー:
-- 実装タイプ: TDDプロセス
+- 実装タイプ: TDDプロセス (個別Task実行)
+- 実行Taskステップ: 6個 (全て成功)
 - 作成ファイル: 12個
 - テストケース: 25個 (全て成功)
 - カバレッジ: 95%
@@ -263,7 +333,8 @@ $ claude code kairo-implement --status
    - [ ] **タスク完了** → [x] **タスク完了**
 
 📊 実装サマリー:
-- 実装タイプ: 直接作業プロセス
+- 実装タイプ: 直接作業プロセス (個別Task実行)
+- 実行Taskステップ: 2個 (全て成功)
 - 作成ファイル: 8個
 - 設定更新: 3個
 - 環境確認: 正常

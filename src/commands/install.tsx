@@ -23,33 +23,55 @@ const InstallComponent: React.FC = () => {
 
         // 現在のディレクトリを取得
         const currentDir = process.cwd();
-        const targetDir = path.join(currentDir, ".claude", "commands");
+        const commandsTargetDir = path.join(currentDir, ".claude", "commands");
+        const agentsTargetDir = path.join(currentDir, ".claude", "agents");
 
-        // tsumikiのcommandsディレクトリを取得
+        // tsumikiのcommandsディレクトリとagentsディレクトリを取得
         const __filename = fileURLToPath(import.meta.url);
         const __dirname = path.dirname(__filename);
-        // ビルド後はdist/commandsを参照（cli.jsがdist/にあるため）
-        const tsumikiDir = path.join(__dirname, "commands");
+        // ビルド後はdist/commands, dist/agentsを参照（cli.jsがdist/にあるため）
+        const tsumikiCommandsDir = path.join(__dirname, "commands");
+        const tsumikiAgentsDir = path.join(__dirname, "agents");
 
-        // .claude/commandsディレクトリが存在しない場合は作成
-        await fs.ensureDir(targetDir);
+        // .claude/commandsと.claude/agentsディレクトリが存在しない場合は作成
+        await fs.ensureDir(commandsTargetDir);
+        await fs.ensureDir(agentsTargetDir);
 
         setStatus("copying");
 
         // commandsディレクトリ内のすべての.mdファイルと.shファイルを取得
-        const files = await fs.readdir(tsumikiDir);
-        const targetFiles = files.filter(
+        const commandFiles = await fs.readdir(tsumikiCommandsDir);
+        const targetCommandFiles = commandFiles.filter(
           (file) => file.endsWith(".md") || file.endsWith(".sh"),
         );
 
+        // agentsディレクトリ内のすべての.mdファイルを取得
+        let targetAgentFiles: string[] = [];
+        try {
+          const agentFiles = await fs.readdir(tsumikiAgentsDir);
+          targetAgentFiles = agentFiles.filter((file) => file.endsWith(".md"));
+        } catch {
+          // agentsディレクトリが存在しない場合はスキップ
+        }
+
         const copiedFilesList: string[] = [];
 
-        for (const file of targetFiles) {
-          const sourcePath = path.join(tsumikiDir, file);
-          const targetPath = path.join(targetDir, file);
+        // commandsファイルをコピー
+        for (const file of targetCommandFiles) {
+          const sourcePath = path.join(tsumikiCommandsDir, file);
+          const targetPath = path.join(commandsTargetDir, file);
 
           await fs.copy(sourcePath, targetPath);
-          copiedFilesList.push(file);
+          copiedFilesList.push(`commands/${file}`);
+        }
+
+        // agentsファイルをコピー
+        for (const file of targetAgentFiles) {
+          const sourcePath = path.join(tsumikiAgentsDir, file);
+          const targetPath = path.join(agentsTargetDir, file);
+
+          await fs.copy(sourcePath, targetPath);
+          copiedFilesList.push(`agents/${file}`);
         }
 
         setCopiedFiles(copiedFilesList);
@@ -125,6 +147,7 @@ const InstallComponent: React.FC = () => {
         </Text>
         <Text color="white"> /tdd-requirements</Text>
         <Text color="white"> /kairo-design</Text>
+        <Text color="white"> @agent-symbol-searcher</Text>
         <Text color="white"> ...</Text>
       </Box>
     );

@@ -8,7 +8,16 @@ TDD開発を始めます。以下の機能について要件を整理してく�
 
 開発コンテキストの準備を行います：
 
-**Taskツール実行**: `/tdd-load-context` でTDD関連ファイルの読み込みとコンテキスト準備を実行
+1. **@agent-symbol-searcher で機能関連情報を検索し、見つかったファイルを読み込み**
+   - 関連する既存機能・コンポーネントを検索し、該当ファイルをReadツールで読み込み
+   - 類似した実装パターンやアーキテクチャを特定し、設計文書をReadツールで読み込み
+   - 既存のインターフェースやAPI仕様を確認し、関連ファイルをReadツールで読み込み
+
+2. **関連ファイルを直接読み込み**
+   - `docs/implements/{{task_id}}/{feature_name}-memo.md` - 既存の開発履歴を確認
+   - `docs/implements/{{task_id}}/{feature_name}-requirements.md` - 既存の要件定義を確認
+   - `docs/implements/{{task_id}}/{feature_name}-testcases.md` - 既存のテストケースを確認
+   - 関連する設計文書やタスクファイルも必要に応じて読み込み
 
 読み込み完了後、準備されたコンテキスト情報を基にTDD要件定義の作業を開始します。
 
