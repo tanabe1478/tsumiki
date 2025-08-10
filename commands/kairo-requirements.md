@@ -1,3 +1,7 @@
+---
+description: ユーザから提供された要件の概要を分析し、EARS（Easy Approach to Requirements Syntax）記法を使用して詳細な受け入れ基準を含む要件定義書を作成します。
+---
+
 # kairo-requirements
 
 ## 目的
