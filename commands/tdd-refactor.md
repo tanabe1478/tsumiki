@@ -1,3 +1,7 @@
+---
+description: TDDのRefactorフェーズを実行します。テストを通す実装が完了した後、コード品質の改善とリファクタリングを行います。
+---
+
 # TDD Refactorフェーズ（コード改善）
 
 TDDのRefactorフェーズを実行します。
