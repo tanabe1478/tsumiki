@@ -287,7 +287,7 @@ $ claude code kairo-implement --status
 
 ```
 ✅ Task 1/6: @task tdd-requirements 完了
-   ファイル: /implementation/{要件名}/TASK-101/requirements.md
+   ファイル: docs/implements/TASK-101/{要件名}-requirements.md
    Task実行結果: 要件定義書作成完了
 
 🏃 Task 2/6: @task tdd-testcases 実行中...
