@@ -10,12 +10,19 @@ TDDのRedフェーズを実行します。
 
 開発コンテキストの準備を行います：
 
-1. **@agent-symbol-searcher でテスト実装関連情報を検索し、見つかったファイルを読み込み**
+1. **技術スタック定義の読み込み**
+   - `docs/tech-stack.md` が存在する場合は読み込み
+   - 存在しない場合は `CLAUDE.md` から技術スタックセクションを読み込み  
+   - どちらも存在しない場合は `.claude/commands/tech-stack.md` のデフォルト定義を使用
+
+2. **@agent-symbol-searcher でテスト実装関連情報を検索し、見つかったファイルを読み込み**
+   - 読み込んだ技術スタック定義に基づいてテストフレームワークを特定
+   - **UIタスクの場合**: E2Eテストフレームワーク（Playwright等）の設定とサンプルを優先的に確認
    - 既存のテストファイルやテスト関数を検索し、該当ファイルをReadツールで読み込み
    - テストセットアップやモックの使用パターンを特定し、関連ファイルをReadツールで読み込み
-   - Jest/Mochaなどのテストフレームワークの設定を確認し、設定ファイルをReadツールで読み込み
+   - **E2Eテスト設定確認**: playwright.config.js、cypress.config.js等の設定ファイルをReadツールで読み込み
 
-2. **関連ファイルを直接読み込み**
+3. **関連ファイルを直接読み込み**
    - `docs/implements/{{task_id}}/{feature_name}-memo.md` - 既存の開発履歴を確認
    - `docs/implements/{{task_id}}/{feature_name}-requirements.md` - 要件定義を確認
    - `docs/implements/{{task_id}}/{feature_name}-testcases.md` - テストケース定義を確認
@@ -38,21 +45,91 @@ TDDのRedフェーズを実行します。
 
 テストコード作成時には、各テストケースの内容について元の資料との照合状況を以下の信号でコメントしてください：
 
-- 🟢 **青信号**: 元の資料を参考にしてほぼ推測していない場合
+- 🔵 **青信号**: 元の資料を参考にしてほぼ推測していない場合
 - 🟡 **黄信号**: 元の資料から妥当な推測の場合
 - 🔴 **赤信号**: 元の資料にない推測の場合
 
 ## 要件
 
-- **使用言語/フレームワーク**: {{language_framework}}
+- **使用言語/フレームワーク**: 読み込んだ技術スタック定義に基づく
 - テストは必ず失敗する状態で作成
 - テスト名は分かりやすく日本語で記述
 - アサーション（期待値の検証）を明確に記述
 - まだ実装されていない関数・メソッドを呼び出す形で作成
 
+## 🎯 UI開発タスクでの**E2Eテスト優先**方針
+
+**UIコンポーネントや画面機能の開発タスクでは、E2Eテスト（特にPlaywright）を最優先で活用してください：**
+
+### 🚀 E2Eテストを**必須**とすべきケース
+
+- **ユーザーインターフェースの動作確認** - UIコンポーネントの表示・非表示、状態変更
+- **画面遷移やナビゲーションの検証** - ページ間の移動、ルーティングの動作
+- **フォーム入力と送信機能のテスト** - 入力検証、エラー処理、送信後の動作
+- **ユーザーインタラクション** - クリック、入力、スクロール、ドラッグ＆ドロップ等
+- **ブラウザ固有の動作確認** - 異なるブラウザでの互換性テスト
+- **レスポンシブデザインの検証** - 画面サイズによるレイアウト変更
+- **アクセシビリティの確認** - キーボード操作、スクリーンリーダー対応
+- **パフォーマンスの確認** - 読み込み時間、レンダリング速度
+
+#### E2Eテストの作成方針
+- **実際のユーザー操作を模倣**: クリック、入力、ナビゲーション等の実際の操作をテストに含める
+- **エンドツーエンドのシナリオ**: ログインから目的の操作完了まで、完全なユーザージャーニーをテスト
+- **視覚的な検証**: 画面表示、要素の配置、スタイリングの確認を含める
+- **複数ブラウザでの検証**: 主要ブラウザでの動作確認を実施
+- **レスポンシブ対応**: 様々な画面サイズでの動作確認
+
+### 🥇 **Playwright強力推奨**フレームワーク
+
+**UIタスクでは原則としてPlaywrightを使用してください：**
+
+#### 1. **Playwright** (🎯最優先推奨)
+   - ✅ 複数ブラウザサポート（Chrome, Firefox, Safari）
+   - ✅ 高速で安定した実行
+   - ✅ 豊富なアサーション機能とセレクター
+   - ✅ 自動待機機能（要素の表示/非表示を自動待機）
+   - ✅ ネットワーク監視・モック機能
+   - ✅ スクリーンショット・動画録画
+   - ✅ パフォーマンス測定機能
+   - ✅ アクセシビリティテスト統合
+
+#### 2. **Cypress** (補完的選択肢)
+   - 開発者フレンドリーなAPI
+   - リアルタイムデバッグ機能
+   - ※ シングルタブ制限あり
+
+#### 3. **WebDriver/Selenium** (レガシー対応時のみ)
+   - 幅広いブラウザサポート
+   - 成熟したエコシステム
+   - ※ 設定が複雑、実行速度が遅い
+
+## 🧭 テスト戦略選択ガイド
+
+### UI関連タスクの場合 → **E2Eテスト最優先**
+- コンポーネント作成・修正
+- ページ作成・レイアウト変更
+- ユーザーインタラクション実装
+- フォーム機能実装
+- ナビゲーション・ルーティング
+
+### ビジネスロジック・API関連タスク → **単体・統合テスト**
+- データ処理アルゴリズム
+- バリデーション関数
+- API エンドポイント
+- データベース操作
+- ユーティリティ関数
+
 ## テストコード作成指針
 
-- Given-When-Then パターンを意識した構造
+### E2Eテスト重視の構造
+- **Scenario-Given-When-Then パターン**を採用
+- **シナリオ定義**: どのようなユーザージャーニーをテストするか
+- **初期状態設定（Given）**: ページアクセス、ログイン状態等
+- **ユーザー操作実行（When）**: クリック、入力、ナビゲーション等
+- **結果確認（Then）**: 画面表示、状態変化、ページ遷移等
+
+### 単体・統合テスト用の構造
+- **Given-When-Then パターン**を使用
 - テストデータの準備（Given）
 - 実際の処理の実行（When）
 - 結果の検証（Then）
@@ -69,7 +146,7 @@ describe('{{feature_name}}', () => {
     // 【テスト目的】: [このテストで何を確認するかを日本語で明記]
     // 【テスト内容】: [具体的にどのような処理をテストするかを説明]
     // 【期待される動作】: [正常に動作した場合の結果を説明]
-    // 🟢🟡🔴 信頼性レベル: [このテストの内容が元資料のどの程度に基づいているか]
+    // 🔵🟡🔴 信頼性レベル: [このテストの内容が元資料のどの程度に基づいているか]
 
     // 【テストデータ準備】: [なぜこのデータを用意するかの理由]
     // 【初期条件設定】: [テスト実行前の状態を説明]
@@ -81,7 +158,7 @@ describe('{{feature_name}}', () => {
 
     // 【結果検証】: [何を検証するかを具体的に説明]
     // 【期待値確認】: [期待される結果とその理由を説明]
-    expect(result).toBe({{expected_output}}); // 【確認内容】: [この検証で確認している具体的な項目] 🟢🟡🔴
+    expect(result).toBe({{expected_output}}); // 【確認内容】: [この検証で確認している具体的な項目] 🔵🟡🔴
   });
 });
 ```
@@ -112,6 +189,8 @@ expect(result.errors).toContain('error message'); // 【確認内容】: [特定
 
 ## 作成するテストコードの例
 
+### 単体テスト・統合テストの例
+
 ```javascript
 // テストファイル: {{test_file_name}}
 describe('{{feature_name}}', () => {
@@ -129,7 +208,7 @@ describe('{{feature_name}}', () => {
     // 【テスト目的】: {{test_purpose}}
     // 【テスト内容】: {{test_description}}
     // 【期待される動作】: {{expected_behavior}}
-    // 🟢🟡🔴 信頼性レベル: [このテストの内容が元資料のどの程度に基づいているか]
+    // 🔵🟡🔴 信頼性レベル: [このテストの内容が元資料のどの程度に基づいているか]
 
     // 【テストデータ準備】: {{test_data_reason}}
     // 【初期条件設定】: {{initial_condition}}
@@ -146,12 +225,148 @@ describe('{{feature_name}}', () => {
 });
 ```
 
+### UIタスク向けE2Eテストの例（Playwright）
+
+```javascript
+// E2Eテストファイル: tests/e2e/{{feature_name}}.spec.js
+import { test, expect } from '@playwright/test';
+
+describe('{{feature_name}} E2Eテスト', () => {
+  test.beforeEach(async ({ page }) => {
+    // 【E2Eテスト前準備】: ブラウザを起動し、テスト対象のページに移動
+    // 【環境初期化】: 各テストを独立して実行するため、ページ状態をリセット
+    await page.goto('/{{target_page}}');
+  });
+
+  test('{{ui_test_case_name}}', async ({ page }) => {
+    // 【テスト目的】: {{ui_test_purpose}}
+    // 【テスト内容】: {{ui_test_description}}
+    // 【期待される動作】: {{expected_ui_behavior}}
+    // 🔵🟡🔴 信頼性レベル: [このテストの内容が元資料のどの程度に基づいているか]
+
+    // 【初期状態確認】: {{initial_ui_state_reason}}
+    // 【画面表示確認】: {{screen_display_verification}}
+    await expect(page.locator('{{initial_element_selector}}')).toBeVisible();
+    // 【確認内容】: 初期状態で必要な要素が表示されていることを確認
+
+    // 【ユーザー操作実行】: {{user_action_description}}
+    // 【操作内容】: {{specific_action_description}}
+    await page.click('{{target_button_selector}}');
+    await page.fill('{{input_selector}}', '{{test_input_value}}');
+    await page.click('{{submit_button_selector}}');
+
+    // 【結果確認】: {{ui_result_verification}}
+    // 【期待される表示変化】: {{expected_ui_changes}}
+    await expect(page.locator('{{result_element_selector}}')).toContainText('{{expected_text}}');
+    // 【確認内容】: {{specific_ui_verification_point}}
+
+    // 【追加検証】: {{additional_verification_description}}
+    await expect(page).toHaveURL('{{expected_url}}');
+    // 【確認内容】: 正しいページに遷移したことを確認
+  });
+
+  test('{{responsive_test_case_name}}', async ({ page }) => {
+    // 【テスト目的】: レスポンシブデザインの動作確認
+    // 【テスト内容】: 異なる画面サイズでのUI表示とユーザビリティの検証
+    // 【期待される動作】: モバイル・タブレット・デスクトップサイズで適切に表示される
+    // 🔵🟡🔴 信頼性レベル: [このテストの内容が元資料のどの程度に基づいているか]
+
+    // 【画面サイズ設定】: モバイルサイズでの表示確認
+    // 【レスポンシブ確認】: 小さい画面での要素配置とユーザビリティをテスト
+    await page.setViewportSize({ width: 375, height: 667 });
+    
+    // 【モバイル表示確認】: モバイル向けレイアウトが適用されることを確認
+    await expect(page.locator('{{mobile_navigation_selector}}')).toBeVisible();
+    // 【確認内容】: モバイル用ナビゲーションが表示されている
+
+    // 【タブレットサイズ設定】: 中間サイズでの表示確認
+    await page.setViewportSize({ width: 768, height: 1024 });
+    
+    // 【タブレット表示確認】: タブレット向けレイアウトの動作を確認
+    await expect(page.locator('{{tablet_layout_selector}}')).toBeVisible();
+    // 【確認内容】: タブレット用レイアウトが適切に表示されている
+  });
+});
+```
+
+### アクセシビリティテストの例
+
+```javascript
+// アクセシビリティテストファイル: tests/e2e/accessibility/{{feature_name}}.spec.js
+import { test, expect } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+
+describe('{{feature_name}} アクセシビリティテスト', () => {
+  test('{{accessibility_test_case_name}}', async ({ page }) => {
+    // 【テスト目的】: Webアクセシビリティガイドライン（WCAG）準拠の確認
+    // 【テスト内容】: 自動アクセシビリティ検査とキーボード操作の検証
+    // 【期待される動作】: アクセシビリティ違反がなく、キーボードで操作可能
+    // 🔵🟡🔴 信頼性レベル: [このテストの内容が元資料のどの程度に基づいているか]
+
+    // 【ページ読み込み】: テスト対象ページへの移動
+    await page.goto('/{{target_page}}');
+
+    // 【自動アクセシビリティ検査】: axe-coreを使用した自動検査
+    // 【WCAG準拠確認】: 色のコントラスト、ALTテキスト、ラベル等の確認
+    const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
+    expect(accessibilityScanResults.violations).toEqual([]);
+    // 【確認内容】: アクセシビリティ違反が検出されないことを確認
+
+    // 【キーボード操作確認】: Tabキーによるフォーカス移動の検証
+    // 【操作性確認】: マウスを使わずにすべての機能が利用可能であることを確認
+    await page.keyboard.press('Tab');
+    await expect(page.locator('{{first_focusable_element}}')).toBeFocused();
+    // 【確認内容】: 最初のフォーカス可能要素にフォーカスが移動している
+  });
+});
+```
+
 ## 提供してください
 
 1. **テストコード**: 実行可能な形式で、必須の日本語コメント付き
 2. **テスト実行コマンド**: どのように実行するか
 3. **期待される失敗メッセージ**: どのようなエラーが出るか
 4. **コメントの説明**: 各日本語コメントの意図と目的
+
+### E2Eテスト実行コマンドの例
+
+#### Playwrightの場合
+```bash
+# 全E2Eテスト実行
+npx playwright test
+
+# 特定のテストファイル実行
+npx playwright test tests/e2e/{{feature_name}}.spec.js
+
+# ヘッドレスモードでない実行（ブラウザ表示）
+npx playwright test --headed
+
+# 特定のブラウザでのテスト実行
+npx playwright test --project=chromium
+npx playwright test --project=firefox
+npx playwright test --project=webkit
+
+# デバッグモードでの実行
+npx playwright test --debug
+
+# レポート生成
+npx playwright show-report
+```
+
+#### Cypressの場合
+```bash
+# Cypress Test Runnerを開く
+npx cypress open
+
+# ヘッドレスモードでテスト実行
+npx cypress run
+
+# 特定のテストファイル実行
+npx cypress run --spec "cypress/e2e/{{feature_name}}.cy.js"
+
+# 特定のブラウザでの実行
+npx cypress run --browser chrome
+```
 
 テストコード作成後、以下を実行してください：
 
