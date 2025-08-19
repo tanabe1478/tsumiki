@@ -262,13 +262,12 @@ Kairoは各タスクに対して内部的にTDDコマンドを使用して以下
 ├── .claude/
 │   └── commands/           # Kairoコマンド
 ├── docs/
+│   ├── implements/        # 実装コード
+│   │   └── {タスクID}/
 │   ├── spec/              # 要件定義書
 │   ├── design/            # 設計文書
 │   ├── tasks/             # タスク一覧
 │   └── reverse/           # リバース文書
-├── implementation/        # 実装コード
-│   └── {要件名}/
-│       └── {タスクID}/
 ├── backend/              # バックエンドコード
 ├── frontend/             # フロントエンドコード
 └── database/             # データベース関連
