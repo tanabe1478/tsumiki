@@ -174,7 +174,7 @@ flowchart TD
 $ claude code kairo-implement --all
 
 # 特定のタスクを実装
-$ claude code kairo-implement --task TASK-101
+$ claude code kairo-implement --task {{task_id}}
 
 # 並行実行可能なタスクを一覧表示
 $ claude code kairo-implement --list-parallel
@@ -270,11 +270,11 @@ $ claude code kairo-implement --status
 ### タスク開始時（TDDプロセス）
 
 ```
-🚀 タスク TASK-101: ユーザー認証API の実装を開始します
+🚀 タスク {{task_id}}: {{task_name}} の実装を開始します
 
 📋 タスク詳細:
 - 要件: REQ-101, REQ-102
-- 依存: TASK-002 ✅
+- 依存: {{依存タスクID}} ✅
 - 推定時間: 4時間
 - 実装タイプ: TDDプロセス
 
@@ -284,11 +284,11 @@ $ claude code kairo-implement --status
 ### タスク開始時（直接作業プロセス）
 
 ```
-🚀 タスク TASK-003: データベース設定 の実装を開始します
+🚀 タスク {{task_id}}: {{task_name}} の実装を開始します
 
 📋 タスク詳細:
 - 要件: REQ-402, REQ-006
-- 依存: TASK-001 ✅
+- 依存: {{依存タスクID}} ✅
 - 推定時間: 3時間
 - 実装タイプ: 直接作業プロセス
 
@@ -299,7 +299,7 @@ $ claude code kairo-implement --status
 
 ```
 ✅ Task 1/6: @task tdd-requirements 完了
-   ファイル: docs/implements/TASK-101/{要件名}-requirements.md
+   ファイル: docs/implements/{要件名}/{{task_id}}/{要件名}-requirements.md
    Task実行結果: 要件定義書作成完了
 
 🏃 Task 2/6: @task tdd-testcases 実行中...
@@ -320,7 +320,7 @@ $ claude code kairo-implement --status
 ### タスク完了時（TDD）
 
 ```
-🎉 タスク TASK-101 が完了しました！
+🎉 タスク {{task_id}} が完了しました！
 
 ✅ タスクファイルのチェックボックスを更新しました
    - [ ] **タスク完了** → [x] **タスク完了**
@@ -334,8 +334,8 @@ $ claude code kairo-implement --status
 - 所要時間: 3時間45分
 
 📝 次の推奨タスク:
-- TASK-102: ユーザー管理API
-- TASK-201: ログイン画面（依存関係あり）
+- {{次のタスクID}}: {{次のタスク名}}
+- {{関連タスクID}}: {{関連タスク名}}（依存関係あり）
 
 続けて実装しますか？ (y/n)
 ```
@@ -343,7 +343,7 @@ $ claude code kairo-implement --status
 ### タスク完了時（直接作業）
 
 ```
-🎉 タスク TASK-003 が完了しました！
+🎉 タスク {{task_id}} が完了しました！
 
 ✅ タスクファイルのチェックボックスを更新しました
    - [ ] **タスク完了** → [x] **タスク完了**
@@ -357,8 +357,8 @@ $ claude code kairo-implement --status
 - 所要時間: 2時間30分
 
 📝 次の推奨タスク:
-- TASK-004: 状態管理設定
-- TASK-101: TaskService実装（依存関係あり）
+- {{次のタスクID}}: {{次のタスク名}}
+- {{関連タスクID}}: {{関連タスク名}}（依存関係あり）
 
 続けて実装しますか？ (y/n)
 ```

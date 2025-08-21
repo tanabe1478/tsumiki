@@ -22,10 +22,10 @@ TDDのRefactorフェーズを実行します。
    - 再利用可能なユーティリティ関数やコンポーネントを確認し、関連ファイルをReadツールで読み込み
 
 3. **関連ファイルを直接読み込み**
-   - `docs/implements/{{task_id}}/{feature_name}-memo.md` - 既存の開発履歴を確認
-   - `docs/implements/{{task_id}}/{feature_name}-requirements.md` - 要件定義を確認
-   - `docs/implements/{{task_id}}/{feature_name}-testcases.md` - テストケース定義を確認
-   - `docs/implements/{{task_id}}/{feature_name}-green-phase.md` - Greenフェーズの実装を確認
+   - `docs/implements/{要件名}/{{task_id}}/{feature_name}-memo.md` - 既存の開発履歴を確認
+   - `docs/implements/{要件名}/{{task_id}}/{feature_name}-requirements.md` - 要件定義を確認
+   - `docs/implements/{要件名}/{{task_id}}/{feature_name}-testcases.md` - テストケース定義を確認
+   - `docs/implements/{要件名}/{{task_id}}/{feature_name}-green-phase.md` - Greenフェーズの実装を確認
    - 関連する設計文書やタスクファイルも必要に応じて読み込み
 
 読み込み完了後、準備されたコンテキスト情報を基にRefactorフェーズ（コード改善）の作業を開始します。
@@ -268,11 +268,11 @@ function add(firstNumber, secondNumber) {
 
 リファクタリング完了後、以下を実行してください：
 
-1. **メモファイル最終更新**: docs/implements/{{task_id}}/{feature_name}-memo.mdファイルのRefactorフェーズセクションと概要を更新
+1. **メモファイル最終更新**: docs/implements/{要件名}/{{task_id}}/{feature_name}-memo.mdファイルのRefactorフェーズセクションと概要を更新
    - 改善内容、セキュリティレビュー結果、パフォーマンスレビュー結果を記録
    - 最終コード、品質評価を記録
    - 概要セクションの現在のフェーズを「完了」に更新
-2. リファクタリング内容と設計改善をdocs/implements/{{task_id}}/{feature_name}-refactor-phase.mdに保存（既存ファイルがある場合は追記）
+2. リファクタリング内容と設計改善をdocs/implements/{要件名}/{{task_id}}/{feature_name}-refactor-phase.mdに保存（既存ファイルがある場合は追記）
 3. TODOステータスを更新（Refactorフェーズ完了をマーク）
 4. **品質判定**: リファクタリング成果の品質を以下の基準で判定
    - テスト結果: 全てのテストが引き続き成功

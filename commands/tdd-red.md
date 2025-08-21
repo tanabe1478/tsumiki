@@ -29,9 +29,9 @@ TDDのRedフェーズを実行します。
    - **E2Eテスト設定確認**: playwright.config.js、cypress.config.js等の設定ファイルをReadツールで読み込み
 
 4. **関連ファイルを直接読み込み**
-   - `docs/implements/{{task_id}}/{feature_name}-memo.md` - 既存の開発履歴を確認
-   - `docs/implements/{{task_id}}/{feature_name}-requirements.md` - 要件定義を確認
-   - `docs/implements/{{task_id}}/{feature_name}-testcases.md` - テストケース定義を確認
+   - `docs/implements/{要件名}/{{task_id}}/{feature_name}-memo.md` - 既存の開発履歴を確認
+   - `docs/implements/{要件名}/{{task_id}}/{feature_name}-requirements.md` - 要件定義を確認
+   - `docs/implements/{要件名}/{{task_id}}/{feature_name}-testcases.md` - テストケース定義を確認
    - 関連する設計文書やタスクファイルも必要に応じて読み込み
 
 読み込み完了後、準備されたコンテキスト情報を基にRedフェーズ（失敗テスト作成）の作業を開始します。
@@ -376,10 +376,10 @@ npx cypress run --browser chrome
 
 テストコード作成後、以下を実行してください：
 
-1. **メモファイル作成・更新**: docs/implements/{{task_id}}/{feature_name}-memo.mdファイルにRedフェーズの内容を作成または追記
+1. **メモファイル作成・更新**: docs/implements/{要件名}/{{task_id}}/{feature_name}-memo.mdファイルにRedフェーズの内容を作成または追記
    - 既存のメモファイルがある場合は、Redフェーズセクションを更新
    - メモファイルが存在しない場合は新規作成
-2. テストコードの設計内容をdocs/implements/{{task_id}}/{feature_name}-red-phase.mdに保存（既存ファイルがある場合は追記）
+2. テストコードの設計内容をdocs/implements/{要件名}/{{task_id}}/{feature_name}-red-phase.mdに保存（既存ファイルがある場合は追記）
 3. TODOステータスを更新（Redフェーズ完了をマーク）
 4. **品質判定**: テストコードの品質を以下の基準で判定
    - テスト実行: 実行可能で失敗することを確認済み
@@ -391,7 +391,7 @@ npx cypress run --browser chrome
 
 ## TDDメモファイル形式
 
-docs/implements/{{task_id}}/{feature_name}-memo.mdファイルの形式：
+docs/implements/{要件名}/{{task_id}}/{feature_name}-memo.mdファイルの形式：
 
 ```markdown
 # TDD開発メモ: {feature_name}
@@ -405,8 +405,8 @@ docs/implements/{{task_id}}/{feature_name}-memo.mdファイルの形式：
 ## 関連ファイル
 
 - 元タスクファイル: `docs/tasks/{taskファイルのパス}.md`
-- 要件定義: `docs/implements/{{task_id}}/{feature_name}-requirements.md`
-- テストケース定義: `docs/implements/{{task_id}}/{feature_name}-testcases.md`
+- 要件定義: `docs/implements/{要件名}/{{task_id}}/{feature_name}-requirements.md`
+- テストケース定義: `docs/implements/{要件名}/{{task_id}}/{feature_name}-testcases.md`
 - 実装ファイル: `[実装ファイルのパス]`
 - テストファイル: `[テストファイルのパス]`
 

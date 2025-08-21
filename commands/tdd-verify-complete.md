@@ -46,10 +46,10 @@ TDD開発でテストケースの実装が完全に完了しているかを検�
    - 実装完了タスクのマーキングパターンを特定し、タスクファイルをReadツールで読み込み
 
 3. **関連ファイルを直接読み込み**
-   - `docs/implements/{{task_id}}/{feature_name}-memo.md` - 既存の開発履歴を確認
-   - `docs/implements/{{task_id}}/{feature_name}-requirements.md` - 要件定義を確認
-   - `docs/implements/{{task_id}}/{feature_name}-testcases.md` - テストケース定義を確認
-   - `docs/implements/{{task_id}}/{feature_name}-refactor-phase.md` - Refactorフェーズの結果を確認
+   - `docs/implements/{要件名}/{{task_id}}/{feature_name}-memo.md` - 既存の開発履歴を確認
+   - `docs/implements/{要件名}/{{task_id}}/{feature_name}-requirements.md` - 要件定義を確認
+   - `docs/implements/{要件名}/{{task_id}}/{feature_name}-testcases.md` - テストケース定義を確認
+   - `docs/implements/{要件名}/{{task_id}}/{feature_name}-refactor-phase.md` - Refactorフェーズの結果を確認
    - 元タスクファイル (`docs/tasks/{taskfile}.md`) - タスクの完了状態を確認
 
 読み込み完了後、準備されたコンテキスト情報を基にテストケース完全性検証を開始します。
@@ -141,7 +141,7 @@ TDD開発でテストケースの実装が完全に完了しているかを検�
 
 #### メモファイルの統合更新
 
-検証完了後、`docs/implements/{{task_id}}/{feature_name}-memo.md` の既存内容を整理・統合し、以下の情報に更新：
+検証完了後、`docs/implements/{要件名}/{{task_id}}/{feature_name}-memo.md` の既存内容を整理・統合し、以下の情報に更新：
 
 ```markdown
 # [機能名] TDD開発完了記録
@@ -149,8 +149,8 @@ TDD開発でテストケースの実装が完全に完了しているかを検�
 ## 確認すべきドキュメント
 
 - `docs/tasks/{taskファイルのパス}.md`
-- `docs/implements/{{task_id}}/{feature_name}-requirements.md`
-- `docs/implements/{{task_id}}/{feature_name}-testcases.md`
+- `docs/implements/{要件名}/{{task_id}}/{feature_name}-requirements.md`
+- `docs/implements/{要件名}/{{task_id}}/{feature_name}-testcases.md`
 
 ## 🎯 最終結果 ([日時])
 - **実装率**: [数]% ([実装数]/[予定数]テストケース)
@@ -261,8 +261,8 @@ TDD開発でテストケースの実装が完全に完了しているかを検�
 ### 確認すべきドキュメント
 
 - **元タスクファイル**: `docs/tasks/{taskファイルのパス}.md` - プロジェクト全体のタスク完了状況（完了マーク更新対象）
-- `docs/implements/{{task_id}}/{feature_name}-requirements.md`
-- `docs/implements/{{task_id}}/{feature_name}-testcases.md`
+- `docs/implements/{要件名}/{{task_id}}/{feature_name}-requirements.md`
+- `docs/implements/{要件名}/{{task_id}}/{feature_name}-testcases.md`
 
 ### 確認すべきテストファイル
 

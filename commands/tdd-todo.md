@@ -7,7 +7,7 @@ description: タスクファイルから実装可能なTODOリストを作成し
 ## 入力
 
 - `docs/tasks/{要件名}-tasks.md` ファイル
-- 各タスクのタスクID（TASK-001, TASK-101など）
+- 各タスクのタスクID（{{task_id}}など）
 - 要件定義文書：
   - `docs/spec/{要件名}-requirements.md`
 - 設計文書群：
@@ -79,14 +79,14 @@ description: タスクファイルから実装可能なTODOリストを作成し
 
 ### フェーズ1: 基盤構築
 
-- [ ] **TASK-001 [DIRECT]**: {タスク名} (REQ-{XXX}対応)
+- [ ] **{{task_id}} [DIRECT]**: {{タスク名}} (REQ-{{XXX}}対応)
   - [ ] {実装詳細1（architecture.mdから抽出）}
   - [ ] {データベース設定（database-schema.sqlから抽出）}
   - [ ] {テスト要件1}
   - [ ] {受け入れ基準（requirements.mdから抽出）}
   - [ ] {完了条件1}
 
-- [ ] **TASK-002 [DIRECT]**: {タスク名} (REQ-{XXX}対応)
+- [ ] **{{task_id}} [DIRECT]**: {{タスク名}} (REQ-{{XXX}}対応)
   - [ ] {実装詳細1（architecture.mdから抽出）}
   - [ ] {環境設定（dataflow.mdから抽出）}
   - [ ] {テスト要件1}
@@ -95,7 +95,7 @@ description: タスクファイルから実装可能なTODOリストを作成し
 
 ### フェーズ2: API実装
 
-- [ ] **TASK-101 [TDD]**: {タスク名} (REQ-{XXX}対応)
+- [ ] **{{task_id}} [TDD]**: {{タスク名}} (REQ-{{XXX}}対応)
   - [ ] {実装詳細1（api-endpoints.mdから抽出）}
   - [ ] {インターフェース実装（interfaces.tsから抽出）}
   - [ ] {テスト要件1}
@@ -104,7 +104,7 @@ description: タスクファイルから実装可能なTODOリストを作成し
 
 ### フェーズ3: フロントエンド実装
 
-- [ ] **TASK-201 [TDD]**: {タスク名} (REQ-{XXX}対応)
+- [ ] **{{task_id}} [TDD]**: {{タスク名}} (REQ-{{XXX}}対応)
   - [ ] {実装詳細1（interfaces.tsから抽出）}
   - [ ] {データフロー実装（dataflow.mdから抽出）}
   - [ ] {UI/UX要件1}
@@ -114,7 +114,7 @@ description: タスクファイルから実装可能なTODOリストを作成し
 
 ### フェーズ4: 統合・最適化
 
-- [ ] **TASK-301 [TDD]**: {タスク名} (REQ-{XXX}対応)
+- [ ] **{{task_id}} [TDD]**: {{タスク名}} (REQ-{{XXX}}対応)
   - [ ] {実装詳細1（全設計文書から抽出）}
   - [ ] {E2Eテスト（dataflow.mdから抽出）}
   - [ ] {パフォーマンス要件（NFR-001から抽出）}

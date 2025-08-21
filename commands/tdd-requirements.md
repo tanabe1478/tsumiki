@@ -30,9 +30,9 @@ TDD開発を始めます。以下の機能について要件を整理してく�
    - 既存のインターフェースやAPI仕様を確認し、関連ファイルをReadツールで読み込み
 
 4. **関連ファイルを直接読み込み**
-   - `docs/implements/{{task_id}}/{feature_name}-memo.md` - 既存の開発履歴を確認
-   - `docs/implements/{{task_id}}/{feature_name}-requirements.md` - 既存の要件定義を確認
-   - `docs/implements/{{task_id}}/{feature_name}-testcases.md` - 既存のテストケースを確認
+   - `docs/implements/{要件名}/{{task_id}}/{feature_name}-memo.md` - 既存の開発履歴を確認
+   - `docs/implements/{要件名}/{{task_id}}/{feature_name}-requirements.md` - 既存の要件定義を確認
+   - `docs/implements/{要件名}/{{task_id}}/{feature_name}-testcases.md` - 既存のテストケースを確認
    - 関連する設計文書やタスクファイルも必要に応じて読み込み
 
 読み込み完了後、準備されたコンテキスト情報を基にTDD要件定義の作業を開始します。
@@ -106,7 +106,7 @@ TDD開発を始めます。以下の機能について要件を整理してく�
 
 整理後、以下を実行してください：
 
-1. 要件定義書をdocs/implements/{{task_id}}/{feature_name}-requirements.mdに保存（既存ファイルがある場合は追記）
+1. 要件定義書をdocs/implements/{要件名}/{{task_id}}/{feature_name}-requirements.mdに保存（既存ファイルがある場合は追記）
 2. TODOステータスを更新（要件定義完了をマーク）
 3. **品質判定**: 要件の品質を以下の基準で判定
    - 要件が明確で曖昧さがない

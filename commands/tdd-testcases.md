@@ -22,9 +22,9 @@ description: TDD開発のためのテストケース洗い出しを行います�
    - テストフレームワークの使用方法を確認し、設定ファイルをReadツールで読み込み
 
 3. **関連ファイルを直接読み込み**
-   - `docs/implements/{{task_id}}/{feature_name}-memo.md` - 既存の開発履歴を確認
-   - `docs/implements/{{task_id}}/{feature_name}-requirements.md` - 要件定義を確認
-   - `docs/implements/{{task_id}}/{feature_name}-testcases.md` - 既存のテストケースを確認
+   - `docs/implements/{要件名}/{{task_id}}/{feature_name}-memo.md` - 既存の開発履歴を確認
+   - `docs/implements/{要件名}/{{task_id}}/{feature_name}-requirements.md` - 要件定義を確認
+   - `docs/implements/{要件名}/{{task_id}}/{feature_name}-testcases.md` - 既存のテストケースを確認
    - 関連する設計文書やタスクファイルも必要に応じて読み込み
 
 読み込み完了後、準備されたコンテキスト情報を基にテストケースの洗い出しを行います。
@@ -158,7 +158,7 @@ afterEach(() => {
 
 すべて洗い出したら以下を実行してください：
 
-1. テストケース一覧をdocs/implements/{{task_id}}/{feature_name}-testcases.mdに保存（既存ファイルがある場合は追記）
+1. テストケース一覧をdocs/implements/{要件名}/{{task_id}}/{feature_name}-testcases.mdに保存（既存ファイルがある場合は追記）
 2. TODOステータスを更新（テストケース洗い出し完了をマーク）
 3. **品質判定**: テストケースの品質を以下の基準で判定
    - テストケース分類: 正常系・異常系・境界値が網羅されている
