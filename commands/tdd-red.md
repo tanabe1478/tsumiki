@@ -10,19 +10,25 @@ TDDのRedフェーズを実行します。
 
 開発コンテキストの準備を行います：
 
-1. **技術スタック定義の読み込み**
+1. **追加ルールの読み込み**
+   - `docs/rule` ディレクトリが存在する場合は読み込み
+   - `docs/rule/tdd` ディレクトリが存在する場合は読み込み  
+   - `docs/rule/tdd/red` ディレクトリが存在する場合は読み込み
+   - 各ディレクトリ内のすべてのファイルを読み込み、追加ルールとして適用
+
+2. **技術スタック定義の読み込み**
    - `docs/tech-stack.md` が存在する場合は読み込み
    - 存在しない場合は `CLAUDE.md` から技術スタックセクションを読み込み  
    - どちらも存在しない場合は `.claude/commands/tech-stack.md` のデフォルト定義を使用
 
-2. **@agent-symbol-searcher でテスト実装関連情報を検索し、見つかったファイルを読み込み**
+3. **@agent-symbol-searcher でテスト実装関連情報を検索し、見つかったファイルを読み込み**
    - 読み込んだ技術スタック定義に基づいてテストフレームワークを特定
    - **UIタスクの場合**: E2Eテストフレームワーク（Playwright等）の設定とサンプルを優先的に確認
    - 既存のテストファイルやテスト関数を検索し、該当ファイルをReadツールで読み込み
    - テストセットアップやモックの使用パターンを特定し、関連ファイルをReadツールで読み込み
    - **E2Eテスト設定確認**: playwright.config.js、cypress.config.js等の設定ファイルをReadツールで読み込み
 
-3. **関連ファイルを直接読み込み**
+4. **関連ファイルを直接読み込み**
    - `docs/implements/{{task_id}}/{feature_name}-memo.md` - 既存の開発履歴を確認
    - `docs/implements/{{task_id}}/{feature_name}-requirements.md` - 要件定義を確認
    - `docs/implements/{{task_id}}/{feature_name}-testcases.md` - テストケース定義を確認

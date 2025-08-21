@@ -10,12 +10,18 @@ TDDのGreenフェーズを実行します。
 
 開発コンテキストの準備を行います：
 
-1. **@agent-symbol-searcher で実装関連情報を検索し、見つかったファイルを読み込み**
+1. **追加ルールの読み込み**
+   - `docs/rule` ディレクトリが存在する場合は読み込み
+   - `docs/rule/tdd` ディレクトリが存在する場合は読み込み  
+   - `docs/rule/tdd/green` ディレクトリが存在する場合は読み込み
+   - 各ディレクトリ内のすべてのファイルを読み込み、追加ルールとして適用
+
+2. **@agent-symbol-searcher で実装関連情報を検索し、見つかったファイルを読み込み**
    - 既存の類似機能やユーティリティ関数を検索し、該当ファイルをReadツールで読み込み
    - 実装パターンやアーキテクチャガイドラインを特定し、設計文書をReadツールで読み込み
    - 依存関係やインポートパスを確認し、関連ファイルをReadツールで読み込み
 
-2. **関連ファイルを直接読み込み**
+3. **関連ファイルを直接読み込み**
    - `docs/implements/{{task_id}}/{feature_name}-memo.md` - 既存の開発履歴を確認
    - `docs/implements/{{task_id}}/{feature_name}-requirements.md` - 要件定義を確認
    - `docs/implements/{{task_id}}/{feature_name}-testcases.md` - テストケース定義を確認

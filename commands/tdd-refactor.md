@@ -10,12 +10,18 @@ TDDのRefactorフェーズを実行します。
 
 開発コンテキストの準備を行います：
 
-1. **@agent-symbol-searcher でリファクタリング関連情報を検索し、見つかったファイルを読み込み**
+1. **追加ルールの読み込み**
+   - `docs/rule` ディレクトリが存在する場合は読み込み
+   - `docs/rule/tdd` ディレクトリが存在する場合は読み込み  
+   - `docs/rule/tdd/refactor` ディレクトリが存在する場合は読み込み
+   - 各ディレクトリ内のすべてのファイルを読み込み、追加ルールとして適用
+
+2. **@agent-symbol-searcher でリファクタリング関連情報を検索し、見つかったファイルを読み込み**
    - 既存のコードスタイルやベストプラクティスを検索し、スタイルガイドをReadツールで読み込み
    - プロジェクト全体のアーキテクチャパターンを特定し、設計文書をReadツールで読み込み
    - 再利用可能なユーティリティ関数やコンポーネントを確認し、関連ファイルをReadツールで読み込み
 
-2. **関連ファイルを直接読み込み**
+3. **関連ファイルを直接読み込み**
    - `docs/implements/{{task_id}}/{feature_name}-memo.md` - 既存の開発履歴を確認
    - `docs/implements/{{task_id}}/{feature_name}-requirements.md` - 要件定義を確認
    - `docs/implements/{{task_id}}/{feature_name}-testcases.md` - テストケース定義を確認

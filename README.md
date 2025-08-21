@@ -30,6 +30,8 @@ Kairoは要件定義から実装までの開発プロセスを自動化・支援
 
 ## 利用可能なコマンド
 
+- `init-tech-stack` - 技術スタックの特定
+
 ### Kairoコマンド（包括的開発フロー）
 - `kairo-requirements` - 要件定義
 - `kairo-design` - 設計文書生成
@@ -55,16 +57,19 @@ Kairoは要件定義から実装までの開発プロセスを自動化・支援
 ### 包括的な開発フロー
 
 ```bash
-# 1. 要件定義
+# 1. 技術スタック初期化
+/init-tech-stack
+
+# 2. 要件定義
 /kairo-requirements
 
-# 2. 設計
+# 3. 設計
 /kairo-design
 
-# 3. タスク分割
+# 4. タスク分割
 /kairo-tasks
 
-# 4. 実装
+# 5. 実装
 /kairo-implement
 ```
 

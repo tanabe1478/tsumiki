@@ -34,12 +34,18 @@ TDD開発でテストケースの実装が完全に完了しているかを検�
 
 検証コンテキストの準備を行います：
 
-1. **@agent-symbol-searcher で検証関連情報を検索し、見つかったファイルを読み込み**
+1. **追加ルールの読み込み**
+   - `docs/rule` ディレクトリが存在する場合は読み込み
+   - `docs/rule/tdd` ディレクトリが存在する場合は読み込み  
+   - `docs/rule/tdd/verify-complete` ディレクトリが存在する場合は読み込み
+   - 各ディレクトリ内のすべてのファイルを読み込み、追加ルールとして適用
+
+2. **@agent-symbol-searcher で検証関連情報を検索し、見つかったファイルを読み込み**
    - 完了予定のテストケースや機能を検索し、該当ファイルをReadツールで読み込み
    - 既存のテストカバレッジや品質基準を確認し、関連ファイルをReadツールで読み込み
    - 実装完了タスクのマーキングパターンを特定し、タスクファイルをReadツールで読み込み
 
-2. **関連ファイルを直接読み込み**
+3. **関連ファイルを直接読み込み**
    - `docs/implements/{{task_id}}/{feature_name}-memo.md` - 既存の開発履歴を確認
    - `docs/implements/{{task_id}}/{feature_name}-requirements.md` - 要件定義を確認
    - `docs/implements/{{task_id}}/{feature_name}-testcases.md` - テストケース定義を確認
