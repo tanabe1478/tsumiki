@@ -111,7 +111,7 @@ description: 分割されたタスクを順番に、またはユーザが指定�
 
    ### B. **直接作業プロセス**（準備作業タスク用）
 
-   a. **準備作業の実行** - `@task general-purpose direct-work-execute`
+   a. **準備作業の実行** - `@task general-purpose direct-setup.md`
    ```
    Task実行: 直接作業実行フェーズ
    目的: ディレクトリ作成、設定ファイル作成、依存関係のインストール、環境設定を行う
@@ -123,7 +123,7 @@ description: 分割されたタスクを順番に、またはユーザが指定�
    実行方式: 個別Task実行
    ```
 
-   b. **作業結果の確認** - `@task general-purpose direct-work-verify`
+   b. **作業結果の確認** - `@task general-purpose direct-verify.md`
    ```
    Task実行: 直接作業確認フェーズ
    目的: 作業完了の検証と成果物確認を行う
@@ -233,8 +233,8 @@ $ claude code kairo-implement --status
 @task general-purpose tdd-verify-complete.md
 
 # 直接作業プロセスの場合
-@task general-purpose direct-work-execute
-@task general-purpose direct-work-verify
+@task general-purpose direct-setup.md
+@task general-purpose direct-verify.md
 ```
 
 ## 実装時の注意事項
