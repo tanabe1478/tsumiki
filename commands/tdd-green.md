@@ -191,10 +191,10 @@ function {{function_name}}(input) {
 
 実装完了後、以下を実行してください：
 
-1. **メモファイル更新**: docs/implements/{要件名}/{{task_id}}/{feature_name}-memo.mdファイルのGreenフェーズセクションを更新
+1. **メモファイル更新**: `docs/implements/{要件名}/{{task_id}}/{feature_name}-memo.md` ファイルのGreenフェーズセクションを更新
    - 実装方針、実装コード、テスト結果、課題・改善点を記録
    - 次のRefactorフェーズで参照できるよう詳細に記録
-2. 実装コードと設計内容をdocs/implements/{要件名}/{{task_id}}/{feature_name}-green-phase.mdに保存（既存ファイルがある場合は追記）
+2. 実装コードと設計内容を `docs/implements/{要件名}/{{task_id}}/{feature_name}-green-phase.md` に保存（既存ファイルがある場合は追記）
 3. TODOステータスを更新（Greenフェーズ完了をマーク）
 4. **自動遷移判定**: 以下の条件を満たす場合は自動で `/tdd-refactor` を実行
    - Taskツールを使用して全てのテストが成功していることを確認済み

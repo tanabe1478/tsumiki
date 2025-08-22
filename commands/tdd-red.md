@@ -376,10 +376,10 @@ npx cypress run --browser chrome
 
 テストコード作成後、以下を実行してください：
 
-1. **メモファイル作成・更新**: docs/implements/{要件名}/{{task_id}}/{feature_name}-memo.mdファイルにRedフェーズの内容を作成または追記
+1. **メモファイル作成・更新**: `docs/implements/{要件名}/{{task_id}}/{feature_name}-memo.md` ファイルにRedフェーズの内容を作成または追記
    - 既存のメモファイルがある場合は、Redフェーズセクションを更新
    - メモファイルが存在しない場合は新規作成
-2. テストコードの設計内容をdocs/implements/{要件名}/{{task_id}}/{feature_name}-red-phase.mdに保存（既存ファイルがある場合は追記）
+2. テストコードの設計内容を `docs/implements/{要件名}/{{task_id}}/{feature_name}-red-phase.md` に保存（既存ファイルがある場合は追記）
 3. TODOステータスを更新（Redフェーズ完了をマーク）
 4. **品質判定**: テストコードの品質を以下の基準で判定
    - テスト実行: 実行可能で失敗することを確認済み
@@ -391,7 +391,7 @@ npx cypress run --browser chrome
 
 ## TDDメモファイル形式
 
-docs/implements/{要件名}/{{task_id}}/{feature_name}-memo.mdファイルの形式：
+`docs/implements/{要件名}/{{task_id}}/{feature_name}-memo.md` ファイルの形式：
 
 ```markdown
 # TDD開発メモ: {feature_name}
