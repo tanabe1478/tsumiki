@@ -50,7 +50,7 @@ DIRECTタスクの設定作業を実行します。設計文書に基づいて�
 
 ## 出力先
 
-作業記録は `docs/implements/{TASK-ID}/` ディレクトリに以下のファイルとして作成されます：
+作業記録は `docs/implements/{要件名}/{TASK-ID}/` ディレクトリに以下のファイルとして作成されます：
 - `setup-report.md`: 設定作業実行記録
 
 ## 出力フォーマット例
@@ -149,7 +149,7 @@ psql -d mydb -f database-schema.sql
 ```
 
 ## 実行後の確認
-- `docs/implements/{TASK-ID}/setup-report.md` ファイルが作成されていることを確認
+- `docs/implements/{要件名}/{TASK-ID}/setup-report.md` ファイルが作成されていることを確認
 - 設定が正しく適用されていることを確認
 - 次のステップ（direct-verify）の準備が整っていることを確認
 
@@ -157,6 +157,6 @@ psql -d mydb -f database-schema.sql
 
 実行前に必要なディレクトリを作成してください：
 ```bash
-mkdir -p docs/implements/{TASK-ID}
+mkdir -p docs/implements/{要件名}/{TASK-ID}
 ```
 ```

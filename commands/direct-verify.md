@@ -32,7 +32,7 @@ DIRECTタスクで実行した設定作業の動作確認とテストを行い�
 3. **設定の確認**
    - 読み込んだ技術スタック定義に基づいて検証項目を特定
    - @agent-symbol-searcher で関連設定や検証パターンを検索し、見つかったファイルをReadツールで読み込み
-   - `docs/implements/{TASK-ID}/setup-report.md` をReadツールで読み込み、設定作業の結果を確認
+   - `docs/implements/{要件名}/{TASK-ID}/setup-report.md` をReadツールで読み込み、設定作業の結果を確認
    - 環境変数の確認
    - 設定ファイルの内容確認
    - 依存関係のインストール状況確認
@@ -58,7 +58,7 @@ DIRECTタスクで実行した設定作業の動作確認とテストを行い�
 
 ## 出力先
 
-確認記録は `docs/implements/{TASK-ID}/` ディレクトリに以下のファイルとして作成されます：
+確認記録は `docs/implements/{要件名}/{TASK-ID}/` ディレクトリに以下のファイルとして作成されます：
 - `verify-report.md`: 設定確認・動作テスト記録
 
 ## 出力フォーマット例
@@ -300,7 +300,7 @@ jq '.port = 3000' config.json > temp.json && mv temp.json config.json
 ````
 
 ## 実行後の確認
-- `docs/implements/{TASK-ID}/verify-report.md` ファイルが作成されていることを確認
+- `docs/implements/{要件名}/{TASK-ID}/verify-report.md` ファイルが作成されていることを確認
 - 全ての確認項目が完了していることを確認
 - 問題が発見された場合は適切に対処されていることを確認
 - タスクの完了条件を満たしていることを確認
@@ -308,7 +308,7 @@ jq '.port = 3000' config.json > temp.json && mv temp.json config.json
 
 ## ディレクトリ確認
 
-`docs/implements/{TASK-ID}/` ディレクトリが存在することを確認してください（direct-setupで作成済みのはず）
+`docs/implements/{要件名}/{TASK-ID}/` ディレクトリが存在することを確認してください（direct-setupで作成済みのはず）
 
 ## タスクの完了マーキング
 品質チェックが十分で、全ての確認項目がクリアされた場合は、**自動的に**tasksディレクトリの該当するタスクファイルに完了マークを付けてください。
@@ -324,7 +324,7 @@ jq '.port = 3000' config.json > temp.json && mv temp.json config.json
 - [ ] パフォーマンス基準を満たしている
 
 ### 完了マークの付け方
-1. `docs/implements/{TASK-ID}/verify-report.md` で完了条件を確認
+1. `docs/implements/{要件名}/{TASK-ID}/verify-report.md` で完了条件を確認
 2. 該当するタスクファイル（taskman-phase*.md）を特定
 3. タスクの完了状況を以下のように更新：
    - `- [ ] **タスク完了**` → `- [x] **タスク完了** ✅ 完了 (YYYY-MM-DD)`
