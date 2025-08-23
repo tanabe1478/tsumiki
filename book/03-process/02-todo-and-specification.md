@@ -170,7 +170,7 @@ TODOから具体的な技術仕様を策定し、実装の方向性を明確に�
 ## 技術仕様
 
 ### API仕様
-```
+```http
 POST /api/users
 Content-Type: application/json
 
