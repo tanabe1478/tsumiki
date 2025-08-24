@@ -84,13 +84,13 @@ Coverage: 94%
 ## ドキュメント確認リスト
 
 ### 必須ファイル
-- docs/implements/{feature_name}-requirements.md
-- docs/implements/{feature_name}-testcases.md  
+- docs/implements/{{task_id}}/{feature_name}-requirements.md
+- docs/implements/{{task_id}}/{feature_name}-testcases.md  
 - docs/todo.md
 
 ### オプションファイル（存在する場合）
-- docs/implements/{test_case_name}-memo.md
-- docs/implements/{feature_name}-architecture.md
+- docs/implements/{{task_id}}/{test_case_name}-memo.md
+- docs/implements/{{task_id}}/{feature_name}-architecture.md
 ```
 
 #### 確認内容例
