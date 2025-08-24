@@ -61,13 +61,15 @@ AITDDにおいて、適切なTODO作成は成功の鍵となります。曖昧�
 
 ```
 docs/
-├── todo.md                    # メインTODO管理
+├── todo.md                                # メインTODO管理
 ├── implements/
-│   ├── user-auth-requirements.md      # 個別機能の詳細仕様
-│   ├── user-auth-testcases.md         # テストケース
-│   └── search-requirements.md
+│    ├──TASK-101/
+│    │  ├── user-auth-requirements.md    # 個別機能の詳細仕様
+│    │  └── user-auth-testcases.md       # テストケース
+│    └──TASK-201/
+│        └── search-requirements.md
 └── archive/
-    └── completed-todos.md              # 完了したTODOのアーカイブ
+    └── completed-todos.md                # 完了したTODOのアーカイブ
 ```
 
 ## 仕様策定：設計の基盤
