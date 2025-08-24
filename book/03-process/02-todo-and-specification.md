@@ -60,9 +60,9 @@ AITDDにおいて、適切なTODO作成は成功の鍵となります。曖昧�
 #### ファイル構成の推奨事項
 
 ```
-doc/
+docs/
 ├── todo.md                    # メインTODO管理
-├── implementation/
+├── implements/
 │   ├── user-auth-requirements.md      # 個別機能の詳細仕様
 │   ├── user-auth-testcases.md         # テストケース
 │   └── search-requirements.md
