@@ -10,16 +10,23 @@ TDDのGreenフェーズを実行します。
 
 開発コンテキストの準備を行います：
 
-1. **@agent-symbol-searcher で実装関連情報を検索し、見つかったファイルを読み込み**
+1. **追加ルールの読み込み**
+   - `AGENTS.md` ファイルが存在する場合は読み込み
+   - `docs/rule` ディレクトリが存在する場合は読み込み
+   - `docs/rule/tdd` ディレクトリが存在する場合は読み込み  
+   - `docs/rule/tdd/green` ディレクトリが存在する場合は読み込み
+   - 各ディレクトリ内のすべてのファイルを読み込み、追加ルールとして適用
+
+2. **@agent-symbol-searcher で実装関連情報を検索し、見つかったファイルを読み込み**
    - 既存の類似機能やユーティリティ関数を検索し、該当ファイルをReadツールで読み込み
    - 実装パターンやアーキテクチャガイドラインを特定し、設計文書をReadツールで読み込み
    - 依存関係やインポートパスを確認し、関連ファイルをReadツールで読み込み
 
-2. **関連ファイルを直接読み込み**
-   - `docs/implements/{{task_id}}/{feature_name}-memo.md` - 既存の開発履歴を確認
-   - `docs/implements/{{task_id}}/{feature_name}-requirements.md` - 要件定義を確認
-   - `docs/implements/{{task_id}}/{feature_name}-testcases.md` - テストケース定義を確認
-   - `docs/implements/{{task_id}}/{feature_name}-red-phase.md` - Redフェーズのテストを確認
+3. **関連ファイルを直接読み込み**
+   - `docs/implements/{要件名}/{{task_id}}/{feature_name}-memo.md` - 既存の開発履歴を確認
+   - `docs/implements/{要件名}/{{task_id}}/{feature_name}-requirements.md` - 要件定義を確認
+   - `docs/implements/{要件名}/{{task_id}}/{feature_name}-testcases.md` - テストケース定義を確認
+   - `docs/implements/{要件名}/{{task_id}}/{feature_name}-red-phase.md` - Redフェーズのテストを確認
    - 関連する設計文書やタスクファイルも必要に応じて読み込み
 
 読み込み完了後、準備されたコンテキスト情報を基にGreenフェーズ（実装）の作業を開始します。
@@ -30,7 +37,7 @@ TDDのGreenフェーズを実行します。
 
 実装コード作成時には、各実装内容について元の資料との照合状況を以下の信号でコメントしてください：
 
-- 🟢 **青信号**: 元の資料を参考にしてほぼ推測していない場合
+- 🔵 **青信号**: 元の資料を参考にしてほぼ推測していない場合
 - 🟡 **黄信号**: 元の資料から妥当な推測の場合
 - 🔴 **赤信号**: 元の資料にない推測の場合
 
@@ -65,7 +72,7 @@ Redフェーズで作成したテストを通すための**実装**を行って�
  * 【機能概要】: [この関数が何をするかを日本語で説明]
  * 【実装方針】: [なぜこのような実装方法を選んだかを説明]
  * 【テスト対応】: [どのテストケースを通すための実装かを明記]
- * 🟢🟡🔴 信頼性レベル: [この実装が元資料のどの程度に基づいているか]
+ * 🔵🟡🔴 信頼性レベル: [この実装が元資料のどの程度に基づいているか]
  * @param {type} paramName - [パラメータの説明]
  * @returns {type} - [戻り値の説明]
  */
@@ -78,13 +85,13 @@ function {{function_name}}(paramName) {
 
 ```javascript
 function processData(input) {
-  // 【入力値検証】: [入力値の妥当性をチェックする理由と方法] 🟢🟡🔴
+  // 【入力値検証】: [入力値の妥当性をチェックする理由と方法] 🔵🟡🔴
   if (!input) {
-    throw new Error('入力値が不正です'); // 【エラー処理】: [なぜこのエラーが必要かを説明] 🟢🟡🔴
+    throw new Error('入力値が不正です'); // 【エラー処理】: [なぜこのエラーが必要かを説明] 🔵🟡🔴
   }
 
-  // 【データ処理開始】: [メイン処理の開始を明示] 🟢🟡🔴
-  // 【処理方針】: [この処理がテストを通すためにどう貢献するかを説明] 🟢🟡🔴
+  // 【データ処理開始】: [メイン処理の開始を明示] 🔵🟡🔴
+  // 【処理方針】: [この処理がテストを通すためにどう貢献するかを説明] 🔵🟡🔴
   const result = {
     // 【結果構造】: [戻り値の構造とその理由を説明]
     validData: [],
@@ -185,10 +192,10 @@ function {{function_name}}(input) {
 
 実装完了後、以下を実行してください：
 
-1. **メモファイル更新**: docs/implements/{{task_id}}/{feature_name}-memo.mdファイルのGreenフェーズセクションを更新
+1. **メモファイル更新**: `docs/implements/{要件名}/{{task_id}}/{feature_name}-memo.md` ファイルのGreenフェーズセクションを更新
    - 実装方針、実装コード、テスト結果、課題・改善点を記録
    - 次のRefactorフェーズで参照できるよう詳細に記録
-2. 実装コードと設計内容をdocs/implements/{{task_id}}/{feature_name}-green-phase.mdに保存（既存ファイルがある場合は追記）
+2. 実装コードと設計内容を `docs/implements/{要件名}/{{task_id}}/{feature_name}-green-phase.md` に保存（既存ファイルがある場合は追記）
 3. TODOステータスを更新（Greenフェーズ完了をマーク）
 4. **自動遷移判定**: 以下の条件を満たす場合は自動で `/tdd-refactor` を実行
    - Taskツールを使用して全てのテストが成功していることを確認済み

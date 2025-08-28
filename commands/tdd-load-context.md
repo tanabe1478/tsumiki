@@ -19,15 +19,15 @@ description: TDD関連ファイル読み込み・コンテキスト準備を行�
 
 ```
 1. 【読み込み】TDDメモファイルの確認
-   - Readツール: `docs/implements/{{task_id}}/{feature_name}-memo.md`
+   - Readツール: `docs/implements/{要件名}/{{task_id}}/{feature_name}-memo.md`
    - 既存の開発履歴、フェーズ情報、検証結果を把握
 
 2. 【読み込み】要件定義文書の確認  
-   - Readツール: `docs/implements/{{task_id}}/{feature_name}-requirements.md`
+   - Readツール: `docs/implements/{要件名}/{{task_id}}/{feature_name}-requirements.md`
    - 機能仕様、入出力、制約条件を把握
 
 3. 【読み込み】テストケース定義の確認
-   - Readツール: `docs/implements/{{task_id}}/{feature_name}-testcases.md` 
+   - Readツール: `docs/implements/{要件名}/{{task_id}}/{feature_name}-testcases.md` 
    - 予定テストケース、分類、期待値を把握
 
 4. 【探索のみ】プロジェクト設計文書の特定
@@ -91,7 +91,7 @@ description: TDD関連ファイル読み込み・コンテキスト準備を行�
 
 読み込んだ各情報について信頼性レベルを判定：
 
-- 🟢 **青信号**: ファイルが存在し、詳細な情報が利用可能
+- 🔵 **青信号**: ファイルが存在し、詳細な情報が利用可能
 - 🟡 **黄信号**: ファイルが存在するが情報が部分的
 - 🔴 **赤信号**: ファイルが存在しない、または推測が必要
 

@@ -1,6 +1,7 @@
 ---
 description: 分割されたタスクを順番に、またはユーザが指定したタスクを実装します。既存のTDDコマンドを活用して品質の高い実装を行います。
 ---
+あなたは実装担当者です。残タスクを調べて 指定されたコマンドを駆使して実装をしてください
 
 # kairo-implement
 
@@ -14,36 +15,49 @@ description: 分割されたタスクを順番に、またはユーザが指定�
 - ユーザがタスクの実装を承認している
 - 既存のTDDコマンドが利用可能である
 - 実装用のワークスペースが設定されている
+- task_id は　`TASK-{4桁の数字}` (例 TASK-0001 ) である
 
 ## 実行内容
 
 **【信頼性レベル指示】**:
 各項目について、元の資料（EARS要件定義書・設計文書含む）との照合状況を以下の信号でコメントしてください：
 
-- 🟢 **青信号**: EARS要件定義書・設計文書を参考にしてほぼ推測していない場合
+- 🔵 **青信号**: EARS要件定義書・設計文書を参考にしてほぼ推測していない場合
 - 🟡 **黄信号**: EARS要件定義書・設計文書から妥当な推測の場合
 - 🔴 **赤信号**: EARS要件定義書・設計文書にない推測の場合
 
-1. **タスクの選択**
-   - @agent-symbol-searcher で指定されたタスクIDを検索し、見つかったタスクファイルをReadツールで読み込み
+1. **追加ルールの読み込み**
+   - `docs/rule` ディレクトリが存在する場合は読み込み
+   - `docs/rule/kairo` ディレクトリが存在する場合は読み込み  
+   - `docs/rule/kairo/implement` ディレクトリが存在する場合は読み込み
+   - 各ディレクトリ内のすべてのファイルを読み込み、追加ルールとして適用
+
+2. **技術スタック定義の読み込み**
+   - `docs/tech-stack.md` が存在する場合は読み込み
+   - 存在しない場合は `CLAUDE.md` から技術スタックセクションを読み込み  
+   - どちらも存在しない場合は `.claude/commands/tech-stack.md` のデフォルト定義を使用
+
+3. **タスクの選択**
+   - @agent-symbol-searcher で指定されたタスクID(TASK-0000形式)を検索し、見つかったタスクファイルをReadツールで読み込み
    - ユーザが指定したタスクIDを確認
    - 指定がない場合は、依存関係に基づいて次のタスクを自動選択
    - 選択したタスクの詳細を表示
+   - 読み込んだ技術スタック定義に基づいて実装方針を決定
 
-2. **依存関係の確認**
+4. **依存関係の確認**
    - @agent-symbol-searcher で依存タスクの状態を検索し、見つかったタスクファイルをReadツールで読み込み
    - 依存タスクが完了しているか確認
    - 未完了の依存タスクがある場合は警告
 
-3. **実装ディレクトリの準備**
+5. **実装ディレクトリの準備**
    - 現在のワークスペースで作業を行う
    - 必要に応じてディレクトリ構造を確認
 
-4. **実装タイプの判定**
+6. **実装タイプの判定**
    - タスクの性質を分析（コード実装 vs 準備作業）
    - 実装方式を決定（TDD vs 直接作業）
 
-5. **実装プロセスの実行**
+7. **実装プロセスの実行**
 
    ### A. **TDDプロセス**（コード実装タスク用）
 
@@ -97,7 +111,7 @@ description: 分割されたタスクを順番に、またはユーザが指定�
 
    ### B. **直接作業プロセス**（準備作業タスク用）
 
-   a. **準備作業の実行** - `@task general-purpose direct-work-execute`
+   a. **準備作業の実行** - `@task general-purpose direct-setup.md`
    ```
    Task実行: 直接作業実行フェーズ
    目的: ディレクトリ作成、設定ファイル作成、依存関係のインストール、環境設定を行う
@@ -109,7 +123,7 @@ description: 分割されたタスクを順番に、またはユーザが指定�
    実行方式: 個別Task実行
    ```
 
-   b. **作業結果の確認** - `@task general-purpose direct-work-verify`
+   b. **作業結果の確認** - `@task general-purpose direct-verify.md`
    ```
    Task実行: 直接作業確認フェーズ
    目的: 作業完了の検証と成果物確認を行う
@@ -120,7 +134,7 @@ description: 分割されたタスクを順番に、またはユーザが指定�
    実行方式: 個別Task実行
    ```
 
-6. **タスクの完了処理**
+8. **タスクの完了処理**
    - タスクのステータスを更新（タスクファイルのチェックボックスにチェックを入れる）
    - 実装結果をドキュメント化
    - 次のタスクを提案
@@ -162,7 +176,7 @@ flowchart TD
 $ claude code kairo-implement --all
 
 # 特定のタスクを実装
-$ claude code kairo-implement --task TASK-101
+$ claude code kairo-implement --task {{task_id}}
 
 # 並行実行可能なタスクを一覧表示
 $ claude code kairo-implement --list-parallel
@@ -219,8 +233,8 @@ $ claude code kairo-implement --status
 @task general-purpose tdd-verify-complete.md
 
 # 直接作業プロセスの場合
-@task general-purpose direct-work-execute
-@task general-purpose direct-work-verify
+@task general-purpose direct-setup.md
+@task general-purpose direct-verify.md
 ```
 
 ## 実装時の注意事項
@@ -258,11 +272,11 @@ $ claude code kairo-implement --status
 ### タスク開始時（TDDプロセス）
 
 ```
-🚀 タスク TASK-101: ユーザー認証API の実装を開始します
+🚀 タスク {{task_id}}: {{task_name}} の実装を開始します
 
 📋 タスク詳細:
 - 要件: REQ-101, REQ-102
-- 依存: TASK-002 ✅
+- 依存: {{依存タスクID}} ✅
 - 推定時間: 4時間
 - 実装タイプ: TDDプロセス
 
@@ -272,11 +286,11 @@ $ claude code kairo-implement --status
 ### タスク開始時（直接作業プロセス）
 
 ```
-🚀 タスク TASK-003: データベース設定 の実装を開始します
+🚀 タスク {{task_id}}: {{task_name}} の実装を開始します
 
 📋 タスク詳細:
 - 要件: REQ-402, REQ-006
-- 依存: TASK-001 ✅
+- 依存: {{依存タスクID}} ✅
 - 推定時間: 3時間
 - 実装タイプ: 直接作業プロセス
 
@@ -287,7 +301,7 @@ $ claude code kairo-implement --status
 
 ```
 ✅ Task 1/6: @task tdd-requirements 完了
-   ファイル: docs/implements/TASK-101/{要件名}-requirements.md
+   ファイル: docs/implements/{要件名}/{{task_id}}/{要件名}-requirements.md
    Task実行結果: 要件定義書作成完了
 
 🏃 Task 2/6: @task tdd-testcases 実行中...
@@ -308,7 +322,7 @@ $ claude code kairo-implement --status
 ### タスク完了時（TDD）
 
 ```
-🎉 タスク TASK-101 が完了しました！
+🎉 タスク {{task_id}} が完了しました！
 
 ✅ タスクファイルのチェックボックスを更新しました
    - [ ] **タスク完了** → [x] **タスク完了**
@@ -322,8 +336,8 @@ $ claude code kairo-implement --status
 - 所要時間: 3時間45分
 
 📝 次の推奨タスク:
-- TASK-102: ユーザー管理API
-- TASK-201: ログイン画面（依存関係あり）
+- {{次のタスクID}}: {{次のタスク名}}
+- {{関連タスクID}}: {{関連タスク名}}（依存関係あり）
 
 続けて実装しますか？ (y/n)
 ```
@@ -331,7 +345,7 @@ $ claude code kairo-implement --status
 ### タスク完了時（直接作業）
 
 ```
-🎉 タスク TASK-003 が完了しました！
+🎉 タスク {{task_id}} が完了しました！
 
 ✅ タスクファイルのチェックボックスを更新しました
    - [ ] **タスク完了** → [x] **タスク完了**
@@ -345,8 +359,8 @@ $ claude code kairo-implement --status
 - 所要時間: 2時間30分
 
 📝 次の推奨タスク:
-- TASK-004: 状態管理設定
-- TASK-101: TaskService実装（依存関係あり）
+- {{次のタスクID}}: {{次のタスク名}}
+- {{関連タスクID}}: {{関連タスク名}}（依存関係あり）
 
 続けて実装しますか？ (y/n)
 ```
