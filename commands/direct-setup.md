@@ -146,8 +146,6 @@ psql -d mydb -f database-schema.sql
 - `direct-verify.md` を実行して設定を確認
 - 必要に応じて設定の調整を実施
 
-```
-
 ## 実行後の確認
 - `docs/implements/{要件名}/{TASK-ID}/setup-report.md` ファイルが作成されていることを確認
 - 設定が正しく適用されていることを確認
@@ -158,5 +156,4 @@ psql -d mydb -f database-schema.sql
 実行前に必要なディレクトリを作成してください：
 ```bash
 mkdir -p docs/implements/{要件名}/{TASK-ID}
-```
 ```
