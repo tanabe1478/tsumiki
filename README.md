@@ -113,6 +113,8 @@ Kairoは要件定義から実装までの開発プロセスを自動化・支援
 
 [rulesync](https://github.com/dyoshikawa/rulesync)を組み合わせて使用することで、Claude Code以外のツールでもtsumikiのコマンドを使用できます。
 
+`tsumiki install` 後、プロジェクトルートで以下のコマンドを実行します。
+
 ```
 npx -y rulesync init
 npx -y rulesync config --init
