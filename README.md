@@ -2,6 +2,8 @@
 
 TsumikiはAI駆動開発のためのフレームワークです。要件定義から実装まで、AIを活用した効率的な開発プロセスを提供します。
 
+基本的にClaude Codeをサポートしますが、それ以外のツールでも使用できます。[Claude Code以外のツールでtsumikiを使用する](#claude-code以外のツールでtsumikiを使用する) を参照してください。
+
 ## インストール
 
 Tsumikiを使用するには、次のnpxコマンドでインストールしてください：
@@ -106,6 +108,34 @@ Kairoは要件定義から実装までの開発プロセスを自動化・支援
 # 開発環境をクリーンアップ
 /clear
 ```
+
+## Claude Code以外のツールでtsumikiを使用する
+
+[rulesync](https://github.com/dyoshikawa/rulesync)を組み合わせて使用することで、Claude Code以外のツールでもtsumikiのコマンドを使用できます。
+
+```
+npx -y rulesync init
+npx -y rulesync config --init
+npx -y rulesync import \
+  --targets claudecode \
+  --features commands,subagents
+
+# Gemini CLIのカスタムスラッシュコマンドを出力する場合は以下のようになります。
+# （`--targets` には `claudecode`, `geminicli`, `roo` の指定が可能です）
+npx -y rulesync generate \
+  --targets geminicli \
+  --features commands
+
+# カスタムスラッシュコマンドの仕様が存在しない（または仕様的な制限のある）AIコーディングツールでも、 `--experimental-simulate-commands` フラグによりいくつかのツールではコマンドファイルを出力できます。
+# Cursorのカスタムスラッシュコマンドを出力する場合は以下のようになります。
+# （`--targets` には `cursor`, `copilot`, `codexcli` の指定が可能です）
+npx -y rulesync generate \
+  --targets cursor \
+  --features commands
+  --experimental-simulate-commands
+```
+
+詳しくは[rulesync](https://github.com/dyoshikawa/rulesync)のREADMEを参照してください。
 
 ## 詳細なマニュアル
 
